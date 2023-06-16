@@ -133,14 +133,6 @@ export const MapSpots = () => {
 
       </MapView>
 
-      {/* {
-        selectedCountry !== undefined
-        ? <View>
-            <Text style={styles.textStyle}>{`${selectedCountry} - ${selectedRegion}`}</Text>
-          </View>
-        : <></>
-      } */}
-
     </View>
   )
 }
@@ -165,5 +157,9 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
     borderRadius: 20,
+  },
+  locationDescription: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   }
 })

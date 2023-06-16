@@ -3,6 +3,7 @@ import React from 'react'
 
 import { useSpots } from "../hooks/useSpots"
 import { useLocation } from "../hooks/useLocation"
+import { useFilters } from "../hooks/useFilters"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
@@ -10,6 +11,11 @@ export const Carousel = () => {
 
   const {spots, setSpots, setSelectedSpot} = useSpots()
   const {setDestination} = useLocation()
+
+  const {
+    selectedCountry,
+    selectedRegion,
+  } = useFilters()
 
   const handlerSelectedSpot = (item) => {
 
@@ -60,6 +66,15 @@ export const Carousel = () => {
 
   return (
     <View style={styles.container}>
+
+      {
+        selectedCountry !== undefined
+        ? <View style={styles.locationDescription}>
+            <Text style={styles.textLocationDescription}>{`${selectedCountry} - ${selectedRegion}`}</Text>
+          </View>
+        : <></>
+      }
+
       {
         spots.length > 0
         ? <FlatList
@@ -77,45 +92,29 @@ export const Carousel = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '95%',
+    width: '100%',
   },
   cardSelected: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: 260,
+    height: 230,
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    marginTop: 15,
+    marginTop: 5,
     backgroundColor: BACKGROUND_COLORS.HEADER,
-    elevation: 5,
-    shadowColor: BACKGROUND_COLORS.HEADER,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    shadowOpacity: .7,
-    shadowRadius: 10,
   },
   card: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: 260,
+    height: 230,
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    marginTop: 15,
+    marginTop: 5,
     backgroundColor: BACKGROUND_COLORS.BODY,
-    elevation: 5,
-    shadowColor: BACKGROUND_COLORS.HEADER,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    shadowOpacity: .7,
-    shadowRadius: 10,
   },
   spotTitleSelected: {
     color: TEXT_COLORS.HEADER,
@@ -131,5 +130,15 @@ const styles = StyleSheet.create({
     height: '90%',
     margin: 3,
     borderRadius: 10,
+  },
+  locationDescription: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5
+  },
+  textLocationDescription: {
+    color: TEXT_COLORS.HEADER,
+    fontSize: 16,
+    fontWeight: '600'
   },
 })

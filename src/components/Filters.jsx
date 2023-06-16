@@ -61,9 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
-    paddingRight: 15,
-    paddingLeft: 15,
   },
   seacrhFilter: {
     flexDirection: 'row',
