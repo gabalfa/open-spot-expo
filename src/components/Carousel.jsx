@@ -47,16 +47,13 @@ export const Carousel = () => {
       onPress={() => handlerSelectedSpot(item)}
     >
       <View style={item.selected ? styles.cardSelected : styles.card}>
-        <Text style={styles.spotTitle}>
+        <Text style={item.selected ? styles.spotTitleSelected : styles.spotTitle}>
           {item.name}
         </Text>
         <Image 
           style={styles.spotImage}
           source={{uri: item.images[0]}}
         />
-        <Text style={styles.spotDescription}>
-          {item.description?.substring(0, 100)}
-        </Text>
       </View>
     </Pressable>
   )
@@ -80,17 +77,17 @@ export const Carousel = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '95%',
   },
   cardSelected: {
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: '90%',
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
+    height: 260,
+    borderRadius: 15,
+    padding: 5,
+    margin: 5,
+    marginTop: 15,
     backgroundColor: BACKGROUND_COLORS.HEADER,
     elevation: 5,
     shadowColor: BACKGROUND_COLORS.HEADER,
@@ -98,17 +95,18 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: .7,
     shadowRadius: 10,
   },
   card: {
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: '90%',
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
+    height: 260,
+    borderRadius: 15,
+    padding: 5,
+    margin: 5,
+    marginTop: 15,
     backgroundColor: BACKGROUND_COLORS.BODY,
     elevation: 5,
     shadowColor: BACKGROUND_COLORS.HEADER,
@@ -116,23 +114,22 @@ const styles = StyleSheet.create({
       width: 5,
       height: 5,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: .7,
     shadowRadius: 10,
+  },
+  spotTitleSelected: {
+    color: TEXT_COLORS.HEADER,
+    fontSize: 12,
+    fontWeight: '600'
   },
   spotTitle: {
     color: TEXT_COLORS.HEADER,
-    fontSize: 14,
-    fontWeight: '600'
+    fontSize: 12,
   },
   spotImage: {
     width: '100%',
-    height: '60%',
+    height: '90%',
     margin: 3,
     borderRadius: 10,
-  },
-  spotDescription: {
-    color: TEXT_COLORS.HEADER,
-    fontSize: 10,
-    width: '100%'
   },
 })

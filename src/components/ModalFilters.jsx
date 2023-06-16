@@ -28,7 +28,7 @@ export const ModalFilters = () => {
   const {setSelectedSpot, spots} = useSpots()
 
   return (
-    <Modal visible={visibleModalFilter}>
+    <Modal animationType={'slide'} visible={visibleModalFilter}>
 
       <View style={styles.container}>
 

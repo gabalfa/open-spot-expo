@@ -3,9 +3,9 @@ import React from 'react'
 
 import { BACKGROUND_COLORS } from "../constants/colors"
 
-import { Filters } from "./Filters"
 import { Carousel } from "./Carousel"
 import { MapSpots } from "./MapSpots"
+import { DetailSpot } from "./DetailSpot"
 
 export const Spots = () => {
 
@@ -14,9 +14,9 @@ export const Spots = () => {
 
       <MapSpots />
 
-      <Filters />
-
       <Carousel />
+
+      <DetailSpot />
       
     </View>
   )
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: '100%',
-    height: '90%',
+    height: '80%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20
   }

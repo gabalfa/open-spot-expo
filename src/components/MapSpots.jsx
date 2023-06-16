@@ -1,5 +1,5 @@
-import { StyleSheet, Dimensions, View, Alert } from 'react-native'
-import React, { useId, useRef } from 'react'
+import { StyleSheet, Dimensions, View, Alert, Text } from 'react-native'
+import React from 'react'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import MapViewDirections from 'react-native-maps-directions'
@@ -27,10 +27,12 @@ export const MapSpots = () => {
   } = useLocation()
 
   const {
+    selectedCountry,
+    selectedRegion,
     setSelectedCountry, setSelectedRegion
   } = useFilters()
   
-  const {spots, selectedSpot, setSelectedSpot} = useSpots()
+  const {spots } = useSpots()
 
   const handleMapReady = () => {
 
@@ -64,8 +66,6 @@ export const MapSpots = () => {
 
   const handleDirectionsReady = (result) => {
 
-    // console.log(`Distance: ${result.distance} km`);
-
     mapRef.current.fitToCoordinates(result.coordinates, {
       edgePadding: {
         right: (width / 20),
@@ -77,7 +77,6 @@ export const MapSpots = () => {
   }
 
   return (
-
     <View style={styles.container}>
 
       <MapView
@@ -133,6 +132,15 @@ export const MapSpots = () => {
         }
 
       </MapView>
+
+      {/* {
+        selectedCountry !== undefined
+        ? <View>
+            <Text style={styles.textStyle}>{`${selectedCountry} - ${selectedRegion}`}</Text>
+          </View>
+        : <></>
+      } */}
+
     </View>
   )
 }
@@ -141,16 +149,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: BACKGROUND_COLORS.BODY,
     width: '90%',
-    height: '60%',
+    height: '30%',
     borderRadius: 20,
     margin: 20,
-    elevation: 5,
+    marginBottom: 0,
+    elevation: 10,
     shadowColor: BACKGROUND_COLORS.HEADER,
     shadowOffset: {
       width: 5,
       height: 5,
     },
-    shadowOpacity: 0.5,
+    shadowOpacity: .7,
     shadowRadius: 10,
   },
   map: {

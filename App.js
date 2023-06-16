@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, SafeAreaView } from 'react-native'
 
-import { GlobalProvider } from "./src/context/Global";
+import { GlobalProvider } from "./src/context/Global"
 
-import { Header } from "./src/components/Header";
-import { Spots } from "./src/components/Spots";
+import { Header } from "./src/components/Header"
+import { Filters } from "./src/components/Filters"
+import { Spots } from "./src/components/Spots"
 
-import { BACKGROUND_COLORS } from "./src/constants/colors";
+import { BACKGROUND_COLORS } from "./src/constants/colors"
 
 export default function App() {
   return (
@@ -15,8 +16,13 @@ export default function App() {
       <StatusBar style="light" />
       
       <GlobalProvider>
+
         <Header />
+
+        <Filters />
+        
         <Spots />
+
       </GlobalProvider>
 
     </SafeAreaView>
@@ -28,6 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: BACKGROUND_COLORS.HEADER,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });

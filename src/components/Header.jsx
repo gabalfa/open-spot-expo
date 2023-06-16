@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <View style={styles.header}>
       <Text style={styles.highLightText}>
-        {'Looking for spots to train your Sport?'}
+        {'Ready to ride a new Spot?'}
       </Text>
     </View>
   )
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '90%',
     height: '10%',
-    paddingBottom: 15
   },
   highLightText: {
     color: TEXT_COLORS.HEADER,

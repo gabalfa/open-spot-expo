@@ -11,7 +11,7 @@ export const BACKGROUND_COLORS = {
 export const TEXT_COLORS = {
     HEADER: '#F88178',
     BODY: '#29272C',
-    TERTIARY: '#8B90A0',
+    TERTIARY: '#5F5D5D',
     ERROR: '#BC001F',
     INVERTED: '#FFFFFF',
     SUCCESS: '#004F29',

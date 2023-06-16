@@ -13,6 +13,7 @@ export function GlobalProvider ({ children }) {
   const [regions, setRegions] = useState([])
   
   const [selectedSpot, setSelectedSpot] = useState('')
+  const [weatherSpot, setWeatherSpot] = useState(undefined)
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedRegion, setSelectedRegion] = useState('')
 
@@ -34,6 +35,7 @@ export function GlobalProvider ({ children }) {
       regions, setRegions,
 
       selectedSpot, setSelectedSpot,
+      weatherSpot, setWeatherSpot,
       selectedCountry, setSelectedCountry,
       selectedRegion, setSelectedRegion,
       

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native'
 import React from 'react'
 
 import { useFilters } from "../hooks/useFilters"
@@ -6,7 +6,8 @@ import { useFilters } from "../hooks/useFilters"
 import { ModalFilters } from "./ModalFilters"
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
-const imageFIlter = require('../../assets/openspot-images/icons8-filter-slider-48.png')
+const imageSearch = require('../../assets/openspot-images/icons8-search-64.png')
+const imageLocation = require('../../assets/openspot-images/icons8-location-64.png')
 
 export const Filters = () => {
 
@@ -21,15 +22,6 @@ export const Filters = () => {
 
   return (
     <View style={styles.container}>
-
-      {
-        selectedCountry !== undefined
-        ? <View>
-            <Text style={styles.textMessage}>{'These are some spots near to'}</Text>
-            <Text style={styles.textStyle}>{`${selectedCountry} - ${selectedRegion}`}</Text>
-          </View>
-        : <></>
-      }
 
       <Pressable 
         onPress={() => {
@@ -48,8 +40,13 @@ export const Filters = () => {
           setVisibleModalFilter(true)
         }}>
         <View style={styles.actionButton}>
-          <Text style={styles.textSelect}>{'Where to?'}</Text>
-          <Image source={imageFIlter}></Image>
+
+          <View style={styles.seacrhFilter}>
+            <Image style={styles.imageLocation} source={imageLocation}></Image>
+            <Text style={styles.textSearch}>{'Where to?'}</Text>
+            <Image style={styles.imageSearch} source={imageSearch}></Image>
+          </View>
+
         </View>
       </Pressable>
     
@@ -61,13 +58,22 @@ export const Filters = () => {
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    height: '10%',
+    paddingRight: 15,
+    paddingLeft: 15,
+  },
+  seacrhFilter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: TEXT_COLORS.HEADER,
     width: '100%',
-    height: '5%',
-    paddingRight: 15,
-    paddingLeft: 15,
+    height: 50,
+    borderRadius: 10,
+    padding: 10,
   },
   actionButton: {
     flexDirection: 'row',
@@ -88,13 +94,25 @@ const styles = StyleSheet.create({
     color: TEXT_COLORS.HEADER,
     fontSize: 16,
     fontWeight: '600',
+    marginTop: 5,
   },
   textSelect: {
-    color: TEXT_COLORS.HEADER,
-    fontSize: 10,
-    fontWeight: '600',
+    
+    fontSize: 20,
     paddingTop: 7,
     paddingRight: 10
+  },
+  textSearch: {
+    color: TEXT_COLORS.TERTIARY,
+    fontSize: 18,
+    width: '60%'
+  },
+  imageLocation: {
+    width: 25,
+    height: 25
+  },
+  imageSearch: {
+    width: 40,
+    height: 40
   }
-  
 })
