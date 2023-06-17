@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, SafeAreaView } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { GlobalProvider } from "./src/context/Global"
 
@@ -11,21 +12,19 @@ import { BACKGROUND_COLORS } from "./src/constants/colors"
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaProvider style={styles.container}>
 
       <StatusBar style="light" />
       
       <GlobalProvider>
 
         <Header />
-
-        {/* <Filters /> */}
         
         <Spots />
 
       </GlobalProvider>
 
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

@@ -35,6 +35,7 @@ export function useSpots () {
             district: doc.data().district,
             sports: doc.data().sports,
             images: doc.data().images,
+            referenceSpot: doc.data().referenceSpot,
             selected
           })
         })

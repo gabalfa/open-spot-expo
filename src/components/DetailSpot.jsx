@@ -1,8 +1,9 @@
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 
 import { useSpots } from "../hooks/useSpots"
 import { useWeather } from "../hooks/useWeather"
+import { useLocation } from "../hooks/useLocation"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
@@ -16,9 +17,8 @@ const Scooter = require('../../assets/openspot-images/icons8-scooter-64.png')
 export const DetailSpot = () => {
 
   const { selectedSpot } = useSpots()
-  const { weatherSpot } = useWeather()
-
-  // console.log(weatherSpot?.weather);
+  const { weatherSpot, getForecastWeather, forecastWeather } = useWeather()
+  const { distance } = useLocation()
 
   return (
     <View style={styles.container}>
@@ -28,24 +28,21 @@ export const DetailSpot = () => {
         ? <>
 
             <View style={styles.sportsContainer}>
-              <Image style={styles.imageSports} source={Cloudy}></Image>
+              <Image style={styles.imageWeather} 
+                // source={{uri: `https://openweathermap.org/img/wn/${weatherSpot?.weather[0].icon}@4x.png`}}
+                source={Cloudy}
+                >
+                </Image>
               <Text style={styles.spotDescription}>
-                {`${weatherSpot?.weather[0].description}`}
+                {`${weatherSpot?.weather[0].main}`}
               </Text>
             </View>
 
             <View style={styles.sportsContainer}>
               <Image style={styles.imageSports} source={Temperature}></Image>
               <Text style={styles.spotTitleSports}>
-                {`${Math.round(parseFloat(weatherSpot?.main.temp) - 273.15)} celsius`}
+                {`${Math.round(parseFloat(weatherSpot?.main.temp) - 273.15)} celsius ${distance} km to centre of city`}
               </Text>
-            </View>
-
-            <View style={styles.sportsContainer}>
-              <Image style={styles.imageSports} source={Scooter}></Image>
-              <Image style={styles.imageSports} source={BMX}></Image>
-              <Image style={styles.imageSports} source={Skateboard}></Image>
-              <Image style={styles.imageSports} source={Rollerblade}></Image>
             </View>
 
           </>
@@ -91,6 +88,13 @@ const styles = StyleSheet.create({
     color: TEXT_COLORS.HEADER,
     fontSize: 14,
     fontWeight: '600'
+  },
+  imageWeather: {
+    // width: 50,
+    // height: 50,
+    width: 25,
+    height: 25,
+    marginRight: 10,
   },
   imageSports: {
     width: 25,

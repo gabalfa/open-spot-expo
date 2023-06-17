@@ -8,7 +8,8 @@ export function useWeather () {
 
   const { 
     destination,
-    weatherSpot, setWeatherSpot
+    weatherSpot, setWeatherSpot,
+    forecastWeather, setForecastWeather
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -24,7 +25,18 @@ export function useWeather () {
 
   }, [destination])
 
+  const getForecastWeather = () => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
+    .then((response) => response.json())
+    .then((json) => json)
+    .then((data) => setForecastWeather(data))
+    .catch()
+  }
+
   return { 
-    weatherSpot
+    weatherSpot,
+    getForecastWeather,
+    forecastWeather
   }
 }

@@ -17,12 +17,12 @@ import { BACKGROUND_COLORS } from "../constants/colors"
 const { width, height } = Dimensions.get('window')
 
 const imageOrigin = require('../../assets/openspot-images/icons8-location-100.png')
-const imageDestination = require('../../assets/openspot-images/icons8-ramp-50.png')
+const imageDestination = require('../../assets/openspot-images/icons8-select-50.png')
 
 export const MapSpots = () => {
 
   const {
-    origin, setOrigin, destination, 
+    origin, setOrigin, destination, setDistance,
     mapId, mapRef
   } = useLocation()
 
@@ -65,7 +65,7 @@ export const MapSpots = () => {
   }
 
   const handleDirectionsReady = (result) => {
-
+    setDistance(result.distance)
     mapRef.current.fitToCoordinates(result.coordinates, {
       edgePadding: {
         right: (width / 20),
@@ -89,12 +89,6 @@ export const MapSpots = () => {
       >
 
         {
-          origin === undefined
-          ? <></>
-          : <Marker coordinate={origin} image={imageOrigin} />
-        }
-
-        {
           spots.map((item) => (
             <Marker 
               key={item.id} 
@@ -108,28 +102,19 @@ export const MapSpots = () => {
           ))
         }
 
-        {
-          destination === undefined
-          ? <MapViewDirections
-              apikey={MAPS_API_KEY}
-              origin={origin}
-              destination={origin}
-              onError={(errorMessage) => {
-                Alert.alert('Sorry we no have directions for this Spot')
-              }}
-            />
-          : <MapViewDirections
-              apikey={MAPS_API_KEY}
-              origin={origin}
-              destination={destination}
-              strokeColor={BACKGROUND_COLORS.HEADER}
-              strokeWidth={4}
-              onReady={(result) => handleDirectionsReady(result)}
-              onError={(errorMessage) => {
-                // Alert.alert('Sorry we no have directions for this Spot')
-              }}
-            />
-        }
+        <MapViewDirections
+          apikey={MAPS_API_KEY}
+          origin={origin}
+          destination={destination}
+          strokeColor={BACKGROUND_COLORS.BLANK}
+          strokeWidth={1}
+          mode={'WALKING'}
+          precision={'high'}
+          onReady={(result) => handleDirectionsReady(result)}
+          onError={(errorMessage) => {
+            // Alert.alert('Sorry we no have directions for this Spot')
+          }}
+        />
 
       </MapView>
 
@@ -144,7 +129,6 @@ const styles = StyleSheet.create({
     height: '30%',
     borderRadius: 20,
     margin: 20,
-    marginBottom: 0,
     elevation: 10,
     shadowColor: BACKGROUND_COLORS.HEADER,
     shadowOffset: {

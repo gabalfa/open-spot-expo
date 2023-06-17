@@ -3,19 +3,14 @@ import React from 'react'
 
 import { useSpots } from "../hooks/useSpots"
 import { useLocation } from "../hooks/useLocation"
-import { useFilters } from "../hooks/useFilters"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
 export const Carousel = () => {
 
   const {spots, setSpots, setSelectedSpot} = useSpots()
-  const {setDestination} = useLocation()
-
-  const {
-    selectedCountry,
-    selectedRegion,
-  } = useFilters()
+  
+  const {setDestination, origin, setOrigin,} = useLocation()
 
   const handlerSelectedSpot = (item) => {
 
@@ -42,7 +37,8 @@ export const Carousel = () => {
       }
       return { ...spot, selected: false }
     })
-
+    
+    setOrigin(item.city + "'s downtown")
     setSpots(updated)
     setSelectedSpot(item)
   }
@@ -68,14 +64,6 @@ export const Carousel = () => {
     <View style={styles.container}>
 
       {
-        selectedCountry !== undefined
-        ? <View style={styles.locationDescription}>
-            <Text style={styles.textLocationDescription}>{`${selectedCountry} - ${selectedRegion}`}</Text>
-          </View>
-        : <></>
-      }
-
-      {
         spots.length > 0
         ? <FlatList
             scrollEnabled={true}
@@ -83,7 +71,7 @@ export const Carousel = () => {
             data={spots}
             renderItem={renderItem}
           />
-        : <Text>{'This location no have spots resgistered'}</Text>
+        : <Text style={styles.textNoResults}>{'Loading...'}</Text>
       }
     </View>
   )
@@ -91,8 +79,9 @@ export const Carousel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
+    height: '40%'
   },
   cardSelected: {
     justifyContent: 'space-between',
@@ -131,12 +120,8 @@ const styles = StyleSheet.create({
     margin: 3,
     borderRadius: 10,
   },
-  locationDescription: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5
-  },
-  textLocationDescription: {
+  textNoResults: {
+    textAlign: 'center',
     color: TEXT_COLORS.HEADER,
     fontSize: 16,
     fontWeight: '600'

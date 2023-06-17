@@ -19,6 +19,9 @@ export function GlobalProvider ({ children }) {
 
   const [origin, setOrigin] = useState(undefined)
   const [destination, setDestination] = useState(undefined)
+  const [distance, setDistance] = useState(0)
+
+  const [forecastWeather, setForecastWeather] = useState(undefined)
 
   const mapId = useId()
   const mapRef = useRef()
@@ -41,6 +44,9 @@ export function GlobalProvider ({ children }) {
       
       origin, setOrigin,
       destination, setDestination,
+      distance, setDistance,
+
+      forecastWeather, setForecastWeather,
 
       mapId, mapRef
       

@@ -11,6 +11,7 @@ export function useLocation () {
     currentAddress, setCurrentAddress,
     origin, setOrigin,
     destination, setDestination,
+    distance, setDistance,
     mapId, mapRef
   } = useContext(GlobalContext)
 
@@ -27,6 +28,7 @@ export function useLocation () {
     currentAddress, setCurrentAddress,
     origin, setOrigin, 
     destination, setDestination,
+    distance, setDistance,
     mapId, mapRef
   }
 }
