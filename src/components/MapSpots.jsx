@@ -107,7 +107,7 @@ export const MapSpots = () => {
           origin={origin}
           destination={destination}
           strokeColor={BACKGROUND_COLORS.BLANK}
-          strokeWidth={1}
+          strokeWidth={3}
           mode={'WALKING'}
           precision={'high'}
           onReady={(result) => handleDirectionsReady(result)}

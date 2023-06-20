@@ -38,7 +38,7 @@ export const Carousel = () => {
       return { ...spot, selected: false }
     })
     
-    setOrigin(item.city + "'s downtown")
+    setOrigin(item.city)
     setSpots(updated)
     setSelectedSpot(item)
   }
@@ -79,30 +79,27 @@ export const Carousel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     width: '100%',
-    height: '40%'
+    height: '35%',
   },
   cardSelected: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: 230,
+    height: '95%',
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    marginTop: 5,
     backgroundColor: BACKGROUND_COLORS.HEADER,
   },
   card: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
-    height: 230,
+    height: '95%',
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    marginTop: 5,
     backgroundColor: BACKGROUND_COLORS.BODY,
   },
   spotTitleSelected: {

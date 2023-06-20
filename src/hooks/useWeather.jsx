@@ -15,28 +15,27 @@ export function useWeather () {
   useEffect(() => {
 
     if (destination !== undefined) {
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherSpot(data))
       .catch()
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
+      .then((response) => response.json())
+      .then((json) => json)
+      .then((data) => setForecastWeather(data))
+      .catch()
+
     }
 
   }, [destination])
 
-  const getForecastWeather = () => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
-    .then((response) => response.json())
-    .then((json) => json)
-    .then((data) => setForecastWeather(data))
-    .catch()
-  }
-
   return { 
     weatherSpot,
-    getForecastWeather,
     forecastWeather
   }
 }

@@ -6,10 +6,10 @@ import { Filters } from "./Filters"
 
 import { TEXT_COLORS } from "../constants/colors"
 
-const BMX = require('../../assets/openspot-images/icons8-bmx-64.png')
-const Skateboard = require('../../assets/openspot-images/icons8-skateboard-100.png')
-const Rollerblade = require('../../assets/openspot-images/icons8-rollerblade-64-black.png')
-const Scooter = require('../../assets/openspot-images/icons8-scooter-64.png')
+// const BMX = require('../../assets/openspot-images/icons8-bmx-64.png')
+// const Skateboard = require('../../assets/openspot-images/icons8-skateboard-100.png')
+// const Rollerblade = require('../../assets/openspot-images/icons8-rollerblade-64-black.png')
+// const Scooter = require('../../assets/openspot-images/icons8-scooter-64.png')
 
 export const Header = () => {
 
@@ -20,12 +20,19 @@ export const Header = () => {
   
   return (
     <View style={styles.header}>
+
       <Text style={styles.highLightText}>
         {'Ready to ride an Open Spot?'}
       </Text>
       <Filters />
 
-      <View style={styles.sportsContainer}>
+      {
+        selectedCountry !== undefined
+        ? <Text style={styles.textLocationDescription}>{`${selectedCountry} - ${selectedRegion}`}</Text>
+        : <></>
+      }
+
+      {/* <View style={styles.sportsContainer}>
 
         {
           selectedCountry !== undefined
@@ -39,7 +46,9 @@ export const Header = () => {
         <Image style={styles.imageSports} source={BMX}></Image>
         <Image style={styles.imageSports} source={Skateboard}></Image>
         <Image style={styles.imageSports} source={Rollerblade}></Image>
-      </View>
+        
+      </View> */}
+      
     </View>
   )
 }
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '90%',
-    height: '30%',
+    height: '25%',
   },
   highLightText: {
     color: TEXT_COLORS.HEADER,
@@ -61,7 +70,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-around',
     width: '100%',
-    height:40,
+    height: 40,
     margin: 5,
     padding: 10,
     borderRadius: 10,
@@ -76,6 +85,6 @@ const styles = StyleSheet.create({
   },
   textLocationDescription: {
     color: TEXT_COLORS.TERTIARY,
-    fontSize: 14,
+    fontSize: 16,
   }
 })

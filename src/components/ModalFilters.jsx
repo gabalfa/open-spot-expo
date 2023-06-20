@@ -91,13 +91,13 @@ export const ModalFilters = () => {
 
           <ScrollView>
             {
-              regions.map((item, index) => {
+              regions.map((region, index) => {
                   return (
                     <Pressable
                       key={index}
                       onPress={() => {
-                        setSelectedRegion(item)
-                        Location.geocodeAsync(item)
+                        setSelectedRegion(region)
+                        Location.geocodeAsync(region)
                           .then((location) => {
                             mapRef.current.animateToRegion({
                               longitude: location[0].longitude,
@@ -109,7 +109,7 @@ export const ModalFilters = () => {
                         )
                       }}>
                         <View style={styles.cardRegion}>
-                          <Text style={item === selectedRegion ? styles.textRegionSelected : styles.textRegion}>{item}</Text>
+                          <Text style={region === selectedRegion ? styles.textRegionSelected : styles.textRegion}>{region}</Text>
                         </View>
                     </Pressable>
                   )
@@ -119,7 +119,7 @@ export const ModalFilters = () => {
           </ScrollView>
 
           <View style={styles.spotsLength}>
-            <Text style={styles.textRegion}>{spots.length ? `Great! there are ${spots.length} Spots in this region` : ''}</Text>
+            <Text style={styles.textRegion}>{(spots.length) ? (`Great! there are ${spots.length} Spots in this region`) : ('')}</Text>
           </View>
 
         </View>

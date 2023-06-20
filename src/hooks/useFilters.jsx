@@ -7,7 +7,7 @@ import { GlobalContext } from '../context/Global'
 
 export function useFilters () {
 
-  const {
+  const { 
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
     countries, setCountries,

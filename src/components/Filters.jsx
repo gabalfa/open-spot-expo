@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
 
 import { useFilters } from "../hooks/useFilters"
@@ -26,8 +26,9 @@ export const Filters = () => {
       <Pressable 
         onPress={() => {
 
-          if (countries.find(country => country.name === selectedCountry)?.regions !== undefined)
+          if (countries.find(country => country.name === selectedCountry)?.regions !== undefined) {
             setRegions(countries.find(country => country.name === selectedCountry).regions)
+          }
 
           const updated = countries.map((country) => {
             if (country.name === selectedCountry) {
@@ -39,15 +40,17 @@ export const Filters = () => {
           setCountries(updated)
           setVisibleModalFilter(true)
         }}>
+
         <View style={styles.actionButton}>
 
-          <View style={styles.seacrhFilter}>
+          <View style={styles.searchFilter}>
             <Image style={styles.imageLocation} source={imageLocation}></Image>
             <Text style={styles.textSearch}>{'Where to?'}</Text>
             <Image style={styles.imageSearch} source={imageSearch}></Image>
           </View>
 
         </View>
+
       </Pressable>
     
       <ModalFilters />
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  seacrhFilter: {
+  searchFilter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
