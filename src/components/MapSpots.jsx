@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
@@ -20,6 +20,8 @@ export const MapSpots = () => {
   const {
     handleMapReady,
     handleDirectionsReady,
+    loadingLocation,
+    setLoadingLocation,
     currentLocation,
     origin, destination,
     mapId, mapRef
@@ -38,6 +40,7 @@ export const MapSpots = () => {
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={origin}
+        onMapLoaded={() => setLoadingLocation(false)}
         onMapReady={() => handleMapReady()}
       >
 
@@ -92,12 +95,17 @@ export const MapSpots = () => {
               strokeColor={BACKGROUND_COLORS.BLANK}
               strokeWidth={3}
               mode={'WALKING'}
-              precision={'high'}
               onReady={(result) => handleDirectionsReady(result)}
             />
         }
 
       </MapView>
+
+      {/* {
+        loadingLocation
+        ? <Text>{'Loading...'}</Text>
+        : <Text>{'Loaded'}</Text>
+      } */}
 
     </View>
   )

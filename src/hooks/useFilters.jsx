@@ -11,6 +11,7 @@ import { GlobalContext } from '../context/Global'
 export function useFilters () {
 
   const {
+    setLoadingLocation,
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
     countries, setCountries,
@@ -72,11 +73,11 @@ export function useFilters () {
     setSelectedRegion('')
     setDestination(undefined)
     setSelectedSpot('')
-
   }
 
   const handleSelectedRegion = (region) => {
     setSelectedRegion(region)
+    setLoadingLocation(true)
     Location.geocodeAsync(region)
       .then((location) => {
         mapRef.current.animateToRegion({
@@ -85,8 +86,8 @@ export function useFilters () {
           longitudeDelta: 1,
           latitudeDelta: 1
         }, 1000)
-      }
-    )
+      })
+      .finally(() => setLoadingLocation(false))
   }
 
   const handleLayoutCountryFocus = (event, item) => {

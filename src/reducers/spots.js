@@ -6,6 +6,16 @@ export function useSpotReducer () {
   
   const [state, dispatch] = useReducer(spotsReducer, initialState)
 
+  const setLoadingLocation = loadingLocation => dispatch({
+    type: 'SET_LOADING_LOCATION',
+    payload: loadingLocation
+  })
+
+  const setLoadingWeather = loadingWeather => dispatch({
+    type: 'SET_LOADING_WEATHER',
+    payload: loadingWeather
+  })
+
   const requestForegroundPermissionsAsync = foregroundPermissionsAsync => dispatch({
     type: 'REQUEST_FOREGROUND_PERMISSIONS_ASYNC',
     payload: foregroundPermissionsAsync
@@ -95,7 +105,8 @@ export function useSpotReducer () {
     setSelectedCountry, setSelectedRegion, setSelectedSpot,
     setOrigin, setDestination, setDistance,
     setWeatherLocal, setForecastWeatherLocal,
-    setWeatherSpot, setForecastWeatherSpot
+    setWeatherSpot, setForecastWeatherSpot,
+    setLoadingLocation, setLoadingWeather
   }
 }
 

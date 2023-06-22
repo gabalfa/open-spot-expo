@@ -10,6 +10,8 @@ const { width, height } = Dimensions.get('window')
 export function useLocation () {
 
   const {
+    loadingLocation,
+    setLoadingLocation,
     foregroundPermissionsAsync,
     
     currentLocation, setCurrentLocation,
@@ -69,11 +71,13 @@ export function useLocation () {
 
       })
       .catch(error => console.warn('Error: permission to access location denied :::', error))
-
+      .finally(() => setLoadingLocation(false))
   }
 
   const handleDirectionsReady = (result) => {
+
     setDistance(result.distance)
+
     mapRef.current.fitToCoordinates(result.coordinates, {
       edgePadding: {
         right: (width / 20),
@@ -82,12 +86,16 @@ export function useLocation () {
         top: (height / 20),
       }
     })
+
+    setLoadingLocation(false)
   }
 
   return {
     handleMapReady,
     handleDirectionsReady,
 
+    loadingLocation,
+    setLoadingLocation,
     foregroundPermissionsAsync,
     currentLocation, setCurrentLocation,
 

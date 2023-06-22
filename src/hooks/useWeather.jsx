@@ -6,7 +6,9 @@ import { API_KEY_WEATHER } from '@env'
 
 export function useWeather () {
 
-  const { 
+  const {
+    loadingWeather,
+    setLoadingWeather,
     currentLocation,
     destination,
     weatherLocal, setWeatherLocal,
@@ -19,12 +21,15 @@ export function useWeather () {
     
     if (currentLocation !== undefined) {
 
+      setLoadingWeather(true)
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherLocal(data))
       .catch()
+      .finally(() => setLoadingWeather(false))
 
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
@@ -32,6 +37,7 @@ export function useWeather () {
       .then((json) => json)
       .then((data) => setForecastWeatherLocal(data))
       .catch()
+      .finally(() => setLoadingWeather(false))
 
     }
 
@@ -41,12 +47,15 @@ export function useWeather () {
 
     if (destination !== undefined) {
 
+      setLoadingWeather(true)
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherSpot(data))
       .catch()
+      .finally(() => setLoadingWeather(false))
 
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
@@ -54,12 +63,14 @@ export function useWeather () {
       .then((json) => json)
       .then((data) => setForecastWeatherSpot(data))
       .catch()
+      .finally(() => setLoadingWeather(false))
 
     }
 
   }, [destination])
 
   return {
+    loadingWeather,
     weatherLocal, forecastWeatherLocal,
     weatherSpot, forecastWeatherSpot
   }

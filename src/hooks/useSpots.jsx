@@ -8,8 +8,10 @@ import { GlobalContext } from '../context/Global'
 export function useSpots () {
 
   const {
+    loadingLocation,
+    setLoadingLocation,
     spots, setSpots,
-    selectedRegion, setSelectedRegion,
+    selectedRegion,
     selectedSpot, setSelectedSpot,
     setOrigin, setDestination
   } = useContext(GlobalContext)
@@ -46,6 +48,8 @@ export function useSpots () {
   }, [selectedRegion])
   
   const handlerSelectedSpot = (item) => {
+
+    setLoadingLocation(true)
 
     setSelectedSpot({
       ...item,

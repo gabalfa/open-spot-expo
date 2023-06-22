@@ -1,4 +1,8 @@
 const ACTION_TYPES = {
+
+  SET_LOADING_LOCATION: 'SET_LOADING_LOCATION',
+  SET_LOADING_WEATHER: 'SET_LOADING_WEATHER',
+
   REQUEST_FOREGROUND_PERMISSIONS_ASYNC: 'REQUEST_FOREGROUND_PERMISSIONS_ASYNC',
   SET_CURRENT_LOCATION: 'SET_CURRENT_LOCATION',
 
@@ -23,6 +27,19 @@ const ACTION_TYPES = {
 }
 
 export const UPDATE_GENERAL_STATE = {
+
+  [ACTION_TYPES.SET_LOADING_LOCATION]: (state, action) => {
+    return {
+      ...state,
+      loadingLocation: action.payload
+    }
+  },
+  [ACTION_TYPES.SET_LOADING_WEATHER]: (state, action) => {
+    return {
+      ...state,
+      loadingWeather: action.payload
+    }
+  },
 
   [ACTION_TYPES.REQUEST_FOREGROUND_PERMISSIONS_ASYNC]: (state, action) => {
     return {

@@ -1,4 +1,8 @@
 export const initialState = {
+
+  loadingLocation: false,
+  loadingWeather: false,
+  
   foregroundPermissionsAsync: undefined,
 
   currentLocation: undefined,

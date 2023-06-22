@@ -7,7 +7,11 @@ export const GlobalContext = createContext()
 export function GlobalProvider ({ children }) {
 
   const { 
-    state, 
+    state,
+
+    setLoadingLocation,
+    setLoadingWeather,
+
     requestForegroundPermissionsAsync,
 
     setCurrentLocation,
@@ -40,6 +44,9 @@ export function GlobalProvider ({ children }) {
   return (
     <GlobalContext.Provider value={{
       ...state,
+
+      setLoadingLocation,
+      setLoadingWeather,
 
       requestForegroundPermissionsAsync,
 

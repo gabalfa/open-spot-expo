@@ -11,12 +11,18 @@ const imgTemperature = require('../../assets/openspot-images/icons8-temperature-
 
 export const DetailSpot = () => {
 
-  const { weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
+  const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
   const { currentLocation, distance } = useLocation()
   const { selectedCountry } = useFilters()
 
   return (
     <View style={styles.container}>
+
+      {/* {
+        loadingWeather
+          ? <Text>{'Loading'}</Text>
+          : <Text>{'Loaded'}</Text>
+      } */}
 
       <View style={styles.containerCurrent}>
 
@@ -127,6 +133,8 @@ export const DetailSpot = () => {
         </ScrollView>
 
       </View>
+
+     
 
     </View>
   )
