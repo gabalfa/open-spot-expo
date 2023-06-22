@@ -1,19 +1,19 @@
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
 import React from 'react'
 
-import { useSpots } from "../hooks/useSpots"
 import { useWeather } from "../hooks/useWeather"
 import { useLocation } from "../hooks/useLocation"
+import { useFilters } from "../hooks/useFilters"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
-const Temperature = require('../../assets/openspot-images/icons8-temperature-100.png')
+const imgTemperature = require('../../assets/openspot-images/icons8-temperature-100.png')
 
 export const DetailSpot = () => {
 
-  const { selectedSpot } = useSpots()
-  const { weatherSpot, forecastWeather } = useWeather()
-  const { distance } = useLocation()
+  const { weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
+  const { currentLocation, distance } = useLocation()
+  const { selectedCountry } = useFilters()
 
   return (
     <View style={styles.container}>
@@ -24,29 +24,65 @@ export const DetailSpot = () => {
 
         {
           weatherSpot !== undefined
-          ? <Text style={styles.currentDescription}>
-              <Image 
-                style={styles.imageWeather} 
-                source={{uri: `https://openweathermap.org/img/wn/${weatherSpot?.weather[0].icon}@4x.png`}}
-                >
-              </Image>
-              {`${weatherSpot?.weather[0].main}`}
-            </Text>
-          : <></>
+          ? <>
+
+              <Text style={styles.currentDescription}>
+                <Image 
+                  style={styles.imageWeather} 
+                  source={{uri: `https://openweathermap.org/img/wn/${weatherSpot?.weather[0].icon}@4x.png`}}
+                  >
+                </Image>
+                {`${weatherSpot?.weather[0].main}`}
+
+                <Text style={styles.temperatureText}>
+                  <Image style={styles.imageTemperature} source={imgTemperature}></Image>
+                  {`${Math.round(parseFloat(weatherSpot?.main.temp) - 273.15)} ˚`}
+                </Text>
+              </Text>
+
+              <View style={styles.temperatureContainer}>
+                <Text style={styles.temperatureText}>
+                  {
+                    ((currentLocation?.country) === (selectedCountry))
+                    ? `${distance?.toFixed(2)} km away from you`
+                    : `${distance?.toFixed(2)} km to centre of city`
+                  }
+                  
+                </Text>
+              </View>
+
+            </>
+          : <>
+
+              <Text style={styles.currentDescription}>
+                <Image 
+                  style={styles.imageWeather} 
+                  source={{uri: `https://openweathermap.org/img/wn/${weatherLocal?.weather[0].icon}@4x.png`}}
+                  >
+                </Image>
+
+                {`${weatherLocal?.weather[0].main}`}
+
+                <Text style={styles.temperatureText}>
+                  <Image style={styles.imageTemperature} source={imgTemperature}></Image>
+                  {`${Math.round(parseFloat(weatherLocal?.main.temp) - 273.15)} ˚`}
+                </Text>
+                
+              </Text>
+
+              <View style={styles.temperatureContainer}>
+                <Text style={styles.temperatureText}>
+                  {
+                    ((currentLocation?.country) === (selectedCountry))
+                    ? ((distance !== undefined ) ? `${distance?.toFixed(2)} km away from you` : 'Local Weather')
+                    : `${distance?.toFixed(2)} km to centre of city`
+                  }
+                  
+                </Text>
+              </View>
+
+            </>
         }
-
-        <View style={styles.temperatureContainer}>
-          <Text style={styles.temperatureText}>
-            <Image style={styles.imageWeather} source={Temperature}></Image>
-            {`${Math.round(parseFloat(weatherSpot?.main.temp) - 273.15)} ˚`}
-          </Text>
-        </View>
-
-        <View style={styles.temperatureContainer}>
-          <Text style={styles.temperatureText}>
-            {`${distance.toFixed(2)} km to centre of city`}
-          </Text>
-        </View>
 
       </View>
 
@@ -57,21 +93,35 @@ export const DetailSpot = () => {
         <ScrollView>
 
           <View style={styles.weatherContainer}>
+
             {
-              forecastWeather !== undefined
-              ? forecastWeather?.list.slice(0, 7).map((item) => (
-                <Text style={styles.weatherDescription}>
-                  {`${item?.dt_txt.substring(item?.dt_txt.length - 8, item?.dt_txt.length - 3)}`}
-                  <Image 
-                    style={styles.imageWeather} 
-                    source={{uri: `https://openweathermap.org/img/wn/${item?.weather[0].icon}@4x.png`}}
-                    >
-                  </Image>
-                  {`${item?.weather[0].main}`}
-                </Text>
-              ))
-              : <></>
+              forecastWeatherSpot !== undefined
+              ? 
+                forecastWeatherSpot?.list.slice(0, 7).map((item, index) => (
+                  <Text key={index} style={styles.weatherDescription}>
+                    {`${item?.dt_txt.substring(item?.dt_txt.length - 8, item?.dt_txt.length - 3)}`}
+                    <Image 
+                      style={styles.imageWeather} 
+                      source={{uri: `https://openweathermap.org/img/wn/${item?.weather[0].icon}@4x.png`}}
+                      >
+                    </Image>
+                    {`${item?.weather[0].main}`}
+                  </Text>
+                ))
+              : 
+                forecastWeatherLocal?.list.slice(0, 7).map((item, index) => (
+                  <Text key={index} style={styles.weatherDescription}>
+                    {`${item?.dt_txt.substring(item?.dt_txt.length - 8, item?.dt_txt.length - 3)}`}
+                    <Image 
+                      style={styles.imageWeather} 
+                      source={{uri: `https://openweathermap.org/img/wn/${item?.weather[0].icon}@4x.png`}}
+                      >
+                    </Image>
+                    {`${item?.weather[0].main}`}
+                  </Text>
+                ))
             }
+
           </View>
 
         </ScrollView>
@@ -91,7 +141,7 @@ const styles = StyleSheet.create({
     height: '20%',
     borderRadius: 10,
     padding: 10,
-    backgroundColor: TEXT_COLORS.HEADER,
+    backgroundColor: TEXT_COLORS.TERTIARY,
     elevation: 15,
     shadowColor: TEXT_COLORS.HEADER,
     shadowOffset: {
@@ -102,10 +152,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
   },
   containerCurrent: {
-    width: '50%',
-    height: '100%',
-  },
-  containeForecast: {
     width: '50%',
     height: '100%',
   },
@@ -130,6 +176,10 @@ const styles = StyleSheet.create({
     height: 25,
     marginRight: 10,
   },
+  imageTemperature: {
+    width: 20,
+    height: 20,
+  },
   currentTitle: {
     color: TEXT_COLORS.BODY,
     alignSelf: 'flex-start',
@@ -138,8 +188,8 @@ const styles = StyleSheet.create({
   },
   currentDescription: {
     color: TEXT_COLORS.BODY,
-    fontSize: 14,
-    fontWeight: '600'
+    fontSize: 12,
+    height: 35,
   },
   forecastTitle: {
     alignSelf: 'flex-end',
@@ -149,6 +199,6 @@ const styles = StyleSheet.create({
   },
   weatherDescription: {
     color: TEXT_COLORS.BODY,
-    fontSize: 14,
+    fontSize: 12,
   },
 })

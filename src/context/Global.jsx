@@ -1,54 +1,72 @@
-import { createContext, useState, useId, useRef } from 'react'
+import { createContext, useId, useRef } from 'react'
+
+import { useSpotReducer } from "../reducers/spots"
 
 export const GlobalContext = createContext()
 
 export function GlobalProvider ({ children }) {
-  
-  const [statusLocationPermission, setStatusLocationPermission] = useState()
-  const [visibleModalFilter, setVisibleModalFilter] = useState(false)
-  const [refScrollCountries, setRefScrollCountries] = useState(undefined)
 
-  const [spots, setSpots] = useState([])
-  const [countries, setCountries] = useState([])
-  const [regions, setRegions] = useState([])
-  
-  const [selectedSpot, setSelectedSpot] = useState('')
-  const [weatherSpot, setWeatherSpot] = useState(undefined)
-  const [selectedCountry, setSelectedCountry] = useState('')
-  const [selectedRegion, setSelectedRegion] = useState('')
+  const { 
+    state, 
+    requestForegroundPermissionsAsync,
 
-  const [origin, setOrigin] = useState(undefined)
-  const [destination, setDestination] = useState(undefined)
-  const [distance, setDistance] = useState(0)
+    setCurrentLocation,
 
-  const [forecastWeather, setForecastWeather] = useState(undefined)
+    setCountries,
+    setRegions,
+    setSpots,
+
+    setVisibleModalFilter,
+
+    setSelectedCountry,
+    setSelectedRegion,
+    setSelectedSpot,
+    
+    setOrigin,
+    setDestination,
+    setDistance,
+
+    setWeatherLocal, 
+    setForecastWeatherLocal,
+    setWeatherSpot,
+    setForecastWeatherSpot,
+
+  } = useSpotReducer()
 
   const mapId = useId()
   const mapRef = useRef()
+  const scrollCountriesRef = useRef()
 
   return (
     <GlobalContext.Provider value={{
+      ...state,
 
-      statusLocationPermission, setStatusLocationPermission,
-      visibleModalFilter, setVisibleModalFilter,
-      refScrollCountries, setRefScrollCountries,
+      requestForegroundPermissionsAsync,
 
-      spots, setSpots,
-      countries, setCountries,
-      regions, setRegions,
+      setCurrentLocation,
 
-      selectedSpot, setSelectedSpot,
-      weatherSpot, setWeatherSpot,
-      selectedCountry, setSelectedCountry,
-      selectedRegion, setSelectedRegion,
-      
-      origin, setOrigin,
-      destination, setDestination,
-      distance, setDistance,
+      setCountries,
+      setRegions,
+      setSpots,
 
-      forecastWeather, setForecastWeather,
+      setVisibleModalFilter,
 
-      mapId, mapRef
+      setSelectedCountry,
+      setSelectedRegion,
+      setSelectedSpot,
+
+      setOrigin,
+      setDestination,
+      setDistance,
+
+      setWeatherLocal, 
+      setForecastWeatherLocal,
+      setWeatherSpot,
+      setForecastWeatherSpot,
+
+      mapId, 
+      scrollCountriesRef,
+      mapRef, 
       
     }}
     >

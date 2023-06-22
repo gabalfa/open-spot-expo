@@ -7,10 +7,11 @@ import { GlobalContext } from '../context/Global'
 
 export function useSpots () {
 
-  const { 
+  const {
     spots, setSpots,
+    selectedRegion, setSelectedRegion,
     selectedSpot, setSelectedSpot,
-    selectedRegion
+    setOrigin, setDestination
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export function useSpots () {
       setSpots(
         querySnapshot.docs.map((doc) => {
 
-          const selected = doc.data().name == selectedSpot.name
+          const selected = doc.data().name === selectedSpot?.name
 
           return ({
             id: doc.id,
@@ -30,7 +31,7 @@ export function useSpots () {
             description: doc.data().description,
             location: doc.data().location,
             country: doc.data().country,
-            state: doc.data().state,
+            region: doc.data().region,
             city: doc.data().city,
             district: doc.data().district,
             sports: doc.data().sports,
@@ -43,9 +44,42 @@ export function useSpots () {
     })
 
   }, [selectedRegion])
+  
+  const handlerSelectedSpot = (item) => {
 
-  return { 
-    spots, setSpots,
+    setSelectedSpot({
+      ...item,
+      location: {
+        latitude: item.location.latitude,
+        longitude: item.location.longitude,
+        latitudeDelta: 0.2,
+        longitudeDelta: 0.2,
+      }   
+    })
+
+    setDestination({
+      latitude: item.location.latitude,
+      longitude: item.location.longitude,
+      latitudeDelta: 0.2,
+      longitudeDelta: 0.2,
+    })
+
+    const updated = spots?.map((spot) => {
+      if (spot.id === item.id) {
+        return { ...spot, selected: true}
+      }
+      return { ...spot, selected: false }
+    })
+    
+    setOrigin(item.city)
+    setSpots(updated)
+    setSelectedSpot(item)
+  }
+
+  return {
+    handlerSelectedSpot,
+    spots,
+    setSpots,
     selectedSpot, setSelectedSpot
   }
 }

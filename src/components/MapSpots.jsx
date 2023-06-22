@@ -1,20 +1,16 @@
-import { StyleSheet, Dimensions, View, Alert, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import MapViewDirections from 'react-native-maps-directions'
-import * as Location from "expo-location"
 
 import { useLocation } from "../hooks/useLocation"
 import { useSpots } from "../hooks/useSpots"
-import { useFilters } from '../hooks/useFilters'
+import { useFilters } from "../hooks/useFilters"
 
 import { MAPS_API_KEY } from '@env'
 
-import { BACKGROUND_COLORS } from "../constants/colors"
-
-
-const { width, height } = Dimensions.get('window')
+import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
 const imageOrigin = require('../../assets/openspot-images/icons8-location-100.png')
 const imageDestination = require('../../assets/openspot-images/icons8-select-50.png')
@@ -22,59 +18,16 @@ const imageDestination = require('../../assets/openspot-images/icons8-select-50.
 export const MapSpots = () => {
 
   const {
-    origin, setOrigin, destination, setDistance,
+    handleMapReady,
+    handleDirectionsReady,
+    currentLocation,
+    origin, destination,
     mapId, mapRef
   } = useLocation()
 
-  const {
-    selectedCountry,
-    selectedRegion,
-    setSelectedCountry, setSelectedRegion
-  } = useFilters()
+  const { selectedCountry } = useFilters()
   
-  const {spots } = useSpots()
-
-  const handleMapReady = () => {
-
-    Location.getCurrentPositionAsync({})
-      .then((location) => {
-
-        setOrigin({
-          longitude: location.coords.longitude,
-          latitude: location.coords.latitude,
-          longitudeDelta: .5,
-          latitudeDelta: .5
-        })
-
-        mapRef.current.animateToRegion({
-          longitude: location.coords.longitude,
-          latitude: location.coords.latitude,
-          longitudeDelta: .5,
-          latitudeDelta: .5
-        }, 1000)
-
-        Location.reverseGeocodeAsync(location.coords)
-        .then((address) => {
-          setSelectedCountry(address[0].country)
-          setSelectedRegion(address[0].region)
-        })
-
-      })
-      .catch(error => console.wa('Error: permission to access location denied :::', error))
-
-  }
-
-  const handleDirectionsReady = (result) => {
-    setDistance(result.distance)
-    mapRef.current.fitToCoordinates(result.coordinates, {
-      edgePadding: {
-        right: (width / 20),
-        bottom: (height / 20),
-        left: (width / 20),
-        top: (height / 20),
-      }
-    })
-  }
+  const { spots } = useSpots()
 
   return (
     <View style={styles.container}>
@@ -87,6 +40,19 @@ export const MapSpots = () => {
         initialRegion={origin}
         onMapReady={() => handleMapReady()}
       >
+
+        {
+          ((currentLocation !== undefined) && (currentLocation !== ''))
+            ? <Marker 
+                image={imageOrigin}
+                coordinate={{
+                  latitude: currentLocation?.latitude, 
+                  longitude: currentLocation?.longitude, 
+                  longitudeDelta: 1,
+                  latitudeDelta: 1
+                }} />
+            : <></>
+        }
 
         {
           spots.map((item) => (
@@ -102,19 +68,34 @@ export const MapSpots = () => {
           ))
         }
 
-        <MapViewDirections
-          apikey={MAPS_API_KEY}
-          origin={origin}
-          destination={destination}
-          strokeColor={BACKGROUND_COLORS.BLANK}
-          strokeWidth={3}
-          mode={'WALKING'}
-          precision={'high'}
-          onReady={(result) => handleDirectionsReady(result)}
-          onError={(errorMessage) => {
-            // Alert.alert('Sorry we no have directions for this Spot')
-          }}
-        />
+        {
+          ((currentLocation?.country) === (selectedCountry))
+          ? <MapViewDirections
+              apikey={MAPS_API_KEY}
+              origin={{
+                longitude: currentLocation.longitude,
+                latitude: currentLocation.latitude,
+                longitudeDelta: currentLocation.longitudeDelta,
+                latitudeDelta: currentLocation.latitudeDelta,
+              }}
+              destination={destination}
+              strokeColor={TEXT_COLORS.BODY}
+              strokeWidth={3}
+              mode={'DRIVING'}
+              precision={'high'}
+              onReady={(result) => handleDirectionsReady(result)}
+            />
+          : <MapViewDirections
+              apikey={MAPS_API_KEY}
+              origin={origin}
+              destination={destination}
+              strokeColor={BACKGROUND_COLORS.BLANK}
+              strokeWidth={3}
+              mode={'WALKING'}
+              precision={'high'}
+              onReady={(result) => handleDirectionsReady(result)}
+            />
+        }
 
       </MapView>
 
@@ -142,8 +123,4 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 20,
   },
-  locationDescription: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  }
 })

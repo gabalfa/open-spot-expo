@@ -1,19 +1,24 @@
+import { Alert } from 'react-native'
 import { useContext, useEffect } from 'react'
 
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
 import { database } from "../config/fb"
 
+import * as Location from "expo-location"
+
 import { GlobalContext } from '../context/Global'
 
 export function useFilters () {
 
-  const { 
+  const {
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
     countries, setCountries,
     regions, setRegions,
     visibleModalFilter, setVisibleModalFilter,
-    refScrollCountries, setRefScrollCountries
+    setDestination, setSelectedSpot,
+    mapRef,
+    scrollCountriesRef,
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -24,13 +29,10 @@ export function useFilters () {
       const unsuscribe = onSnapshot(queryResult, querySnapshot => {
         setCountries(
           querySnapshot.docs.map((doc) => {
-            const selected = doc.data().name == selectedCountry
             return ({
               id: doc.id,
               name: doc.data().name,
-              regions: doc.data().regions,
-              selected
-              // images: doc.data().images
+              regions: doc.data().regions
             })
           })
         )
@@ -38,25 +40,90 @@ export function useFilters () {
     
   }, [])
 
-  // const filteredProducts = (products) => {
-  //   return products.filter(product => {
-  //     return (
-  //       product.price >= filters.minPrice &&
-  //       (
-  //         filters.category === 'all' ||
-  //         product.category === filters.category
-  //       )
-  //     )
-  //   })
-  // }
+  const handlePressOpenModal = () => {
+
+    if (countries.find(country => country.name === selectedCountry)?.regions !== undefined) {
+      setRegions(countries.find(country => country.name === selectedCountry).regions)
+    }
+
+    const updated = countries.map((country) => {
+      if (country.name === selectedCountry) {
+        return { ...country, selected: true}
+      }
+      return { ...country, selected: false }
+    })
+
+    setCountries(updated)
+    setVisibleModalFilter(true)
+
+  }
+
+  const handleSelectedCountry = (item) => {
+
+    const updated = countries.map((country) => {
+      if (country.id === item.id) {
+        return { ...country, selected: true}
+      }
+      return { ...country, selected: false }
+    })
+    setCountries(updated)
+    setSelectedCountry(item.name)
+    setRegions(item.regions)
+    setSelectedRegion('')
+    setDestination(undefined)
+    setSelectedSpot('')
+
+  }
+
+  const handleSelectedRegion = (region) => {
+    setSelectedRegion(region)
+    Location.geocodeAsync(region)
+      .then((location) => {
+        mapRef.current.animateToRegion({
+          longitude: location[0].longitude,
+          latitude: location[0].latitude,
+          longitudeDelta: 1,
+          latitudeDelta: 1
+        }, 1000)
+      }
+    )
+  }
+
+  const handleLayoutCountryFocus = (event, item) => {
+
+    if (item.name === selectedCountry) {
+      const layout = event.nativeEvent.layout
+      scrollCountriesRef.current.scrollTo({
+        x: layout.x,
+        y: 0,
+        animated: true,
+      })
+      scrollCountriesRef.current.flashScrollIndicators()
+    } 
+
+  }
+
+  const handlePressCloseModal = () => {
+    if (selectedRegion.length > 0) {
+      setVisibleModalFilter(false)
+    }
+    else {
+      Alert.alert('Select a region')
+    }
+  }
 
   return { 
-    // filters, setFilters, // filteredProducts,
-    visibleModalFilter, setVisibleModalFilter,
-    refScrollCountries, setRefScrollCountries,
-    selectedCountry, setSelectedCountry,
-    selectedRegion, setSelectedRegion,
+    handleSelectedCountry,
+    handleSelectedRegion,
+    handleLayoutCountryFocus,
+    handlePressCloseModal,
+    handlePressOpenModal,
+    scrollCountriesRef,
     countries, setCountries,
     regions, setRegions,
+    selectedCountry, setSelectedCountry,
+    selectedRegion, setSelectedRegion,
+    visibleModalFilter, setVisibleModalFilter
   }
+
 }

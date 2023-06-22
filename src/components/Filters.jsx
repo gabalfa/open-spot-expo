@@ -11,35 +11,13 @@ const imageLocation = require('../../assets/openspot-images/icons8-location-64.p
 
 export const Filters = () => {
 
-  const {
-    setVisibleModalFilter,
-    countries,
-    selectedCountry,
-    selectedRegion,
-    setRegions,
-    setCountries
-  } = useFilters()
+  const { handlePressOpenModal } = useFilters()
 
   return (
     <View style={styles.container}>
 
       <Pressable 
-        onPress={() => {
-
-          if (countries.find(country => country.name === selectedCountry)?.regions !== undefined) {
-            setRegions(countries.find(country => country.name === selectedCountry).regions)
-          }
-
-          const updated = countries.map((country) => {
-            if (country.name === selectedCountry) {
-              return { ...country, selected: true}
-            }
-            return { ...country, selected: false }
-          })
-
-          setCountries(updated)
-          setVisibleModalFilter(true)
-        }}>
+        onPress={handlePressOpenModal}>
 
         <View style={styles.actionButton}>
 
@@ -69,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: TEXT_COLORS.HEADER,
+    backgroundColor: TEXT_COLORS.INVERTED,
     width: '100%',
     height: 50,
     borderRadius: 10,
@@ -79,28 +57,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-  },
-  info: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textMessage: {
-    color: TEXT_COLORS.HEADER,
-    fontSize: 10,
-    fontWeight: '600' 
-  },
-  textStyle: {
-    color: TEXT_COLORS.HEADER,
-    fontSize: 16,
-    fontWeight: '600',
-    marginTop: 5,
-  },
-  textSelect: {
-    
-    fontSize: 20,
-    paddingTop: 7,
-    paddingRight: 10
   },
   textSearch: {
     color: TEXT_COLORS.TERTIARY,

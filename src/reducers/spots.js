@@ -1,74 +1,106 @@
-export const spotInitialState = JSON.parse(window.localStorage.getItem('spot')) || []
+import { useReducer } from 'react'
+import { UPDATE_GENERAL_STATE } from "../constants/actionTypes"
+import { initialState } from "./initialState";
 
-export const SPOT_ACTION_TYPES = {
-  ADD_TO_SPOT: 'ADD_TO_SPOT',
-  REMOVE_FROM_SPOT: 'REMOVE_FROM_SPOT',
-  CLEAR_SPOT: 'CLEAR_SPOT'
-}
+export function useSpotReducer () {
+  
+  const [state, dispatch] = useReducer(spotsReducer, initialState)
 
-// update localStorage with state for spot
-export const updateLocalStorage = state => {
-  window.localStorage.setItem('spot', JSON.stringify(state))
-}
+  const requestForegroundPermissionsAsync = foregroundPermissionsAsync => dispatch({
+    type: 'REQUEST_FOREGROUND_PERMISSIONS_ASYNC',
+    payload: foregroundPermissionsAsync
+  })
 
-const UPDATE_STATE_BY_ACTION = {
-  [SPOT_ACTION_TYPES.ADD_TO_SPOT]: (state, action) => {
-    const { id } = action.payload
-    const productInSpotIndex = state.findIndex(item => item.id === id)
+  const setCurrentLocation = currentLocation => dispatch({
+    type: 'SET_CURRENT_LOCATION',
+    payload: currentLocation
+  })
 
-    if (productInSpotIndex >= 0) {
-      // 👀 una forma sería usando structuredClone
-      // const newState = structuredClone(state)
-      // newState[productInSpotIndex].quantity += 1
+  const setCountries = countries => dispatch({
+    type: 'SET_COUNTRIES',
+    payload: countries
+  })
 
-      // 👶 usando el map
-      // const newState = state.map(item => {
-      //   if (item.id === id) {
-      //     return {
-      //       ...item,
-      //       quantity: item.quantity + 1
-      //     }
-      //   }
+  const setVisibleModalFilter = visibleModalFilter => dispatch({
+    type: 'SET_VISIBLE_MODAL_FILTER',
+    payload: visibleModalFilter
+  })
 
-      //   return item
-      // })
+  const setRegions = regions => dispatch({
+    type: 'SET_REGIONS',
+    payload: regions
+  })
 
-      // ⚡ usando el spread operator y slice
-      const newState = [
-        ...state.slice(0, productInSpotIndex),
-        { ...state[productInSpotIndex], quantity: state[productInSpotIndex].quantity + 1 },
-        ...state.slice(productInSpotIndex + 1)
-      ]
+  const setSpots = spots => dispatch({
+    type: 'SET_SPOTS',
+    payload: spots
+  })
 
-      updateLocalStorage(newState)
-      return newState
-    }
+  const setSelectedCountry = selectedCountry => dispatch({
+    type: 'SET_SELECTED_COUNTRY',
+    payload: selectedCountry
+  })
 
-    const newState = [
-      ...state,
-      {
-        ...action.payload,
-        quantity: 1
-      }
-    ]
+  const setSelectedRegion = selectedRegion => dispatch({
+    type: 'SET_SELECTED_REGION',
+    payload: selectedRegion
+  })
 
-    updateLocalStorage(newState)
-    return newState
-  },
-  [SPOT_ACTION_TYPES.REMOVE_FROM_SPOT]: (state, action) => {
-    const { id } = action.payload
-    const newState = state.filter(item => item.id !== id)
-    updateLocalStorage(newState)
-    return newState
-  },
-  [SPOT_ACTION_TYPES.CLEAR_SPOT]: () => {
-    updateLocalStorage([])
-    return []
+  const setSelectedSpot = selectedSpot => dispatch({
+    type: 'SET_SELECTED_SPOT',
+    payload: selectedSpot
+  })
+
+  const setOrigin = origin => dispatch({
+    type: 'SET_ORIGIN',
+    payload: origin
+  })
+
+  const setDestination = destination => dispatch({
+    type: 'SET_DESTINATION',
+    payload: destination
+  })
+
+  const setDistance = distance => dispatch({
+    type: 'SET_DISTANCE',
+    payload: distance
+  })
+
+  const setWeatherLocal = weatherLocal => dispatch({
+    type: 'SET_WEATHER_LOCAL',
+    payload: weatherLocal
+  })
+
+  const setForecastWeatherLocal = forecastWeatherLocal => dispatch({
+    type: 'SET_FORECAST_WEATHER_LOCAL',
+    payload: forecastWeatherLocal
+  })
+
+  const setWeatherSpot = weatherSpot => dispatch({
+    type: 'SET_WEATHER_SPOT',
+    payload: weatherSpot
+  })
+
+  const setForecastWeatherSpot = forecastWeatherSpot => dispatch({
+    type: 'SET_FORECAST_WEATHER_SPOT',
+    payload: forecastWeatherSpot
+  })
+
+  return { 
+    state, 
+    requestForegroundPermissionsAsync,
+    setCurrentLocation,
+    setSpots, setCountries, setRegions,
+    setVisibleModalFilter,
+    setSelectedCountry, setSelectedRegion, setSelectedSpot,
+    setOrigin, setDestination, setDistance,
+    setWeatherLocal, setForecastWeatherLocal,
+    setWeatherSpot, setForecastWeatherSpot
   }
 }
 
-export const spotReducer = (state, action) => {
+const spotsReducer = (state, action) => {
   const { type: actionType } = action
-  const updateState = UPDATE_STATE_BY_ACTION[actionType]
+  const updateState = UPDATE_GENERAL_STATE[actionType]
   return updateState ? updateState(state, action) : state
 }

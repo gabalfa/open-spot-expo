@@ -7,10 +7,35 @@ import { API_KEY_WEATHER } from '@env'
 export function useWeather () {
 
   const { 
+    currentLocation,
     destination,
+    weatherLocal, setWeatherLocal,
+    forecastWeatherLocal, setForecastWeatherLocal,
     weatherSpot, setWeatherSpot,
-    forecastWeather, setForecastWeather
+    forecastWeatherSpot, setForecastWeatherSpot,
   } = useContext(GlobalContext)
+
+  useEffect(() => {
+    
+    if (currentLocation !== undefined) {
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
+      .then((response) => response.json())
+      .then((json) => json)
+      .then((data) => setWeatherLocal(data))
+      .catch()
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
+      .then((response) => response.json())
+      .then((json) => json)
+      .then((data) => setForecastWeatherLocal(data))
+      .catch()
+
+    }
+
+  }, [currentLocation])
 
   useEffect(() => {
 
@@ -27,15 +52,15 @@ export function useWeather () {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
       .then((response) => response.json())
       .then((json) => json)
-      .then((data) => setForecastWeather(data))
+      .then((data) => setForecastWeatherSpot(data))
       .catch()
 
     }
 
   }, [destination])
 
-  return { 
-    weatherSpot,
-    forecastWeather
+  return {
+    weatherLocal, forecastWeatherLocal,
+    weatherSpot, forecastWeatherSpot
   }
 }

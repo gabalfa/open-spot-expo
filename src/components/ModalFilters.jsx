@@ -1,10 +1,7 @@
-import { StyleSheet, Text, View, Modal, Pressable, ScrollView, Alert } from 'react-native'
+import { StyleSheet, Text, View, Modal, Pressable, ScrollView } from 'react-native'
 import React from 'react'
 
-import * as Location from "expo-location"
-
 import { useFilters } from "../hooks/useFilters"
-import { useLocation } from "../hooks/useLocation"
 import { useSpots } from "../hooks/useSpots"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
@@ -12,20 +9,18 @@ import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 export const ModalFilters = () => {
 
   const {
-    countries, setCountries,
-    selectedCountry, setSelectedCountry,
-    selectedRegion, setSelectedRegion,
-    regions, setRegions,
-    visibleModalFilter, setVisibleModalFilter,
-    refScrollCountries, setRefScrollCountries
+    handleSelectedCountry,
+    handleSelectedRegion,
+    handleLayoutCountryFocus,
+    handlePressCloseModal,
+    countries,
+    selectedRegion,
+    regions,
+    visibleModalFilter,
+    scrollCountriesRef
   } = useFilters()
 
-  const {
-    setDestination,
-    mapRef
-  } = useLocation()
-
-  const {setSelectedSpot, spots} = useSpots()
+  const { spots } = useSpots()
 
   return (
     <Modal animationType={'slide'} visible={visibleModalFilter}>
@@ -41,42 +36,18 @@ export const ModalFilters = () => {
           <View style={styles.carrousel}>
 
             <ScrollView 
-              ref={(refScrollCountries) => setRefScrollCountries(refScrollCountries)}
+              ref={scrollCountriesRef}
               horizontal={true}
             >
               {
-                countries.map((item, index) => (
+                countries.map((item) => (
                   <View
                     key={item.id} 
-                    onLayout={(event) => {
-                      if (item.name === selectedCountry) {
-                        const layout = event.nativeEvent.layout
-                        refScrollCountries.scrollTo({
-                          x: layout.x,
-                          y: 0,
-                          animated: true,
-                        })
-                        refScrollCountries.flashScrollIndicators()
-                      } 
-                    }}
+                    onLayout={(event) => handleLayoutCountryFocus(event, item)}
                   >
                     <Pressable
-                      
                       style={item.selected ? styles.cardCountriesSelected : styles.cardCountries}
-                      onPress={() => {
-                        const updated = countries.map((country) => {
-                          if (country.id === item.id) {
-                            return { ...country, selected: true}
-                          }
-                          return { ...country, selected: false }
-                        })
-                        setCountries(updated)
-                        setSelectedCountry(item.name)
-                        setRegions(item.regions)
-                        setSelectedRegion('')
-                        setDestination(undefined)
-                        setSelectedSpot('')
-                      }}
+                      onPress={() => handleSelectedCountry(item)}
                     >
                       <Text style={styles.textStyle}>{item.name}</Text>
                     </Pressable>
@@ -95,22 +66,10 @@ export const ModalFilters = () => {
                   return (
                     <Pressable
                       key={index}
-                      onPress={() => {
-                        setSelectedRegion(region)
-                        Location.geocodeAsync(region)
-                          .then((location) => {
-                            mapRef.current.animateToRegion({
-                              longitude: location[0].longitude,
-                              latitude: location[0].latitude,
-                              longitudeDelta: 1,
-                              latitudeDelta: 1
-                            }, 1000)
-                          }
-                        )
-                      }}>
-                        <View style={styles.cardRegion}>
-                          <Text style={region === selectedRegion ? styles.textRegionSelected : styles.textRegion}>{region}</Text>
-                        </View>
+                      onPress={() => handleSelectedRegion(region)}>
+                      <View style={styles.cardRegion}>
+                        <Text style={region === selectedRegion ? styles.textRegionSelected : styles.textRegion}>{region}</Text>
+                      </View>
                     </Pressable>
                   )
                 }
@@ -127,15 +86,8 @@ export const ModalFilters = () => {
         <View style={styles.footer}>
 
           <Pressable
-            style={[styles.buttonClose]}
-            onPress={() => {
-              if (selectedRegion.length > 0) {
-                setVisibleModalFilter(false)
-              }
-              else {
-                Alert.alert('Select a region')
-              }
-            }}>
+            style={styles.buttonClose}
+            onPress={handlePressCloseModal}>
               <Text style={styles.textStyle}>{'Done!'}</Text>
           </Pressable>
 
@@ -205,11 +157,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     backgroundColor: BACKGROUND_COLORS.BODY,
-  },
-  textCountries: {
-    color: TEXT_COLORS.HEADER,
-    fontSize: 16,
-    fontWeight: '600',
   },
   cardRegion: {
     justifyContent: 'center',

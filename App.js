@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet } from 'react-native'
+import {registerRootComponent} from 'expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { GlobalProvider } from "./src/context/Global"
 
 import { Header } from "./src/components/Header"
-import { Filters } from "./src/components/Filters"
 import { Spots } from "./src/components/Spots"
 
 import { BACKGROUND_COLORS } from "./src/constants/colors"

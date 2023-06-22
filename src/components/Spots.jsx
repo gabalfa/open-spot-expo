@@ -1,6 +1,8 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 
+import { useLocation } from "../hooks/useLocation"
+
 import { BACKGROUND_COLORS } from "../constants/colors"
 
 import { Carousel } from "./Carousel"
@@ -9,15 +11,22 @@ import { DetailSpot } from "./DetailSpot"
 
 export const Spots = () => {
 
+  const { foregroundPermissionsAsync } = useLocation()
+  
   return (
     <View style={styles.spots}>
 
-      <MapSpots />
+      {
+        foregroundPermissionsAsync?.status === "granted"
+        ? 
+        <>
+          <MapSpots />
+          <Carousel />
+          <DetailSpot />
+        </>
+        : <></>
+      }
 
-      <Carousel />
-
-      <DetailSpot />
-      
     </View>
   )
 }
