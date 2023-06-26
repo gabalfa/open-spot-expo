@@ -3,6 +3,8 @@ import { useContext, useEffect } from 'react'
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
 import { database } from "../config/fb"
 
+import * as Location from "expo-location"
+
 import { GlobalContext } from '../context/Global'
 
 export function useSpots () {
@@ -51,33 +53,45 @@ export function useSpots () {
 
     setLoadingLocation(true)
 
-    setSelectedSpot({
-      ...item,
-      location: {
-        latitude: item.location.latitude,
-        longitude: item.location.longitude,
-        latitudeDelta: 0.2,
-        longitudeDelta: 0.2,
-      }   
-    })
-
-    setDestination({
-      latitude: item.location.latitude,
-      longitude: item.location.longitude,
-      latitudeDelta: 0.2,
-      longitudeDelta: 0.2,
-    })
-
     const updated = spots?.map((spot) => {
       if (spot.id === item.id) {
         return { ...spot, selected: true}
       }
       return { ...spot, selected: false }
     })
-    
-    setOrigin(item.city)
+
     setSpots(updated)
-    setSelectedSpot(item)
+
+    Location.geocodeAsync(item.country + ', ' + item.city)
+      .then((location) => {
+
+        setOrigin({
+          longitude: location[0].longitude,
+          latitude: location[0].latitude,
+          longitudeDelta: 1,
+          latitudeDelta: 1
+        })
+       
+        setSelectedSpot({
+          ...item,
+          location: {
+            latitude: item.location.latitude,
+            longitude: item.location.longitude,
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
+          }   
+        })
+    
+        setDestination({
+          latitude: item.location.latitude,
+          longitude: item.location.longitude,
+          latitudeDelta: 0.2,
+          longitudeDelta: 0.2,
+        })
+
+      })
+      .finally(() => setLoadingLocation(false))
+    
   }
 
   return {

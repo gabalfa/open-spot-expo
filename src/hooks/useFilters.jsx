@@ -76,9 +76,11 @@ export function useFilters () {
   }
 
   const handleSelectedRegion = (region) => {
+
     setSelectedRegion(region)
     setLoadingLocation(true)
-    Location.geocodeAsync(region)
+
+    Location.geocodeAsync(selectedCountry + ', ' + region)
       .then((location) => {
         mapRef.current.animateToRegion({
           longitude: location[0].longitude,
@@ -88,6 +90,7 @@ export function useFilters () {
         }, 1000)
       })
       .finally(() => setLoadingLocation(false))
+
   }
 
   const handleLayoutCountryFocus = (event, item) => {

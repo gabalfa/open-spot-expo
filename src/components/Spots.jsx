@@ -20,9 +20,10 @@ export const Spots = () => {
         foregroundPermissionsAsync?.status === "granted"
         ? 
         <>
+          <DetailSpot />
           <MapSpots />
           <Carousel />
-          <DetailSpot />
+          
         </>
         : <></>
       }

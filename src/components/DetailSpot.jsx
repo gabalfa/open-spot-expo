@@ -9,6 +9,29 @@ import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
 const imgTemperature = require('../../assets/openspot-images/icons8-temperature-100.png')
 
+const icon_01d = require('../../assets/openspot-images/icons/01d.png')
+const icon_01n = require('../../assets/openspot-images/icons/01n.png')
+const icon_02d = require('../../assets/openspot-images/icons/02d.png')
+const icon_02n = require('../../assets/openspot-images/icons/02n.png')
+const icon_03d = require('../../assets/openspot-images/icons/03d.png')
+const icon_03n = require('../../assets/openspot-images/icons/03n.png')
+const icon_04d = require('../../assets/openspot-images/icons/04d.png')
+const icon_04n = require('../../assets/openspot-images/icons/04n.png')
+const icon_09d = require('../../assets/openspot-images/icons/09d.png')
+const icon_09n = require('../../assets/openspot-images/icons/09n.png')
+
+const icon_10d = require('../../assets/openspot-images/icons/10d.png')
+const icon_10n = require('../../assets/openspot-images/icons/10n.png')
+const icon_11d = require('../../assets/openspot-images/icons/11d.png')
+const icon_11n = require('../../assets/openspot-images/icons/11n.png')
+const icon_13d = require('../../assets/openspot-images/icons/13d.png')
+const icon_13n = require('../../assets/openspot-images/icons/13n.png')
+const icon_50d = require('../../assets/openspot-images/icons/50d.png')
+const icon_50n = require('../../assets/openspot-images/icons/50n.png')
+
+const icon_unknown = require('../../assets/openspot-images/icons/unknown.png')
+
+
 export const DetailSpot = () => {
 
   const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
@@ -23,7 +46,7 @@ export const DetailSpot = () => {
           ? <Text>{'Loading'}</Text>
           : <Text>{'Loaded'}</Text>
       } */}
-
+{/* 
       <View style={styles.containerCurrent}>
 
         <Text style={styles.currentTitle}>{`Now`}</Text>
@@ -91,7 +114,7 @@ export const DetailSpot = () => {
         }
 
       </View>
-
+      
       <View style={styles.containerForecast}>
 
         <Text style={styles.forecastTitle}>{`Forecast next hours`}</Text>
@@ -115,7 +138,7 @@ export const DetailSpot = () => {
                   </Text>
                 ))
               : 
-                forecastWeatherLocal?.list.slice(0, 7).map((item, index) => (
+                forecastWeatherLocal?.list?.slice(0, 7).map((item, index) => (
                   <Text key={index} style={styles.weatherDescription}>
                     {`${item?.dt_txt.substring(item?.dt_txt.length - 8, item?.dt_txt.length - 3)}`}
                     <Image 
@@ -132,10 +155,9 @@ export const DetailSpot = () => {
 
         </ScrollView>
 
-      </View>
+      </View> */}
 
-     
-
+    
     </View>
   )
 }
@@ -148,23 +170,25 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '20%',
     borderRadius: 10,
+    marginTop: 20,
     padding: 10,
     backgroundColor: TEXT_COLORS.TERTIARY,
-    elevation: 15,
-    shadowColor: TEXT_COLORS.HEADER,
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
+    // elevation: 15,
+    // shadowColor: TEXT_COLORS.HEADER,
+    // shadowOffset: {
+    //   width: 5,
+    //   height: 5,
+    // },
+    // shadowOpacity: 0.5,
+    // shadowRadius: 10,
   },
   containerCurrent: {
+    justifyContent: 'space-between',
     width: '50%',
     height: '100%',
   },
   weatherContainer: {
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     width: '100%',
     marginBottom: 5,
   },

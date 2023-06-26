@@ -38,7 +38,7 @@ export const MapSpots = () => {
         id={mapId}
         ref={mapRef}
         style={styles.map}
-        provider={PROVIDER_GOOGLE}
+        // provider={PROVIDER_GOOGLE}
         initialRegion={origin}
         onMapLoaded={() => setLoadingLocation(false)}
         onMapReady={() => handleMapReady()}
