@@ -3,6 +3,8 @@ import React from 'react'
 
 import { useSpots } from "../hooks/useSpots"
 
+import { Loading } from "./Loading"
+
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
 export const Carousel = () => {
@@ -34,7 +36,7 @@ export const Carousel = () => {
               </Pressable>
             )}
           />
-        : <Text style={styles.textNoResults}>{'Loading...'}</Text>
+        : <Loading />
       }
     </View>
   )
@@ -53,7 +55,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    backgroundColor: TEXT_COLORS.TERTIARY,
+    borderColor: TEXT_COLORS.HEADER,
+    borderWidth: 2
+    // backgroundColor: TEXT_COLORS.TERTIARY,
   },
   card: {
     justifyContent: 'space-between',
@@ -64,9 +68,11 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 5,
     backgroundColor: BACKGROUND_COLORS.BODY,
+    borderColor: BACKGROUND_COLORS.BODY,
+    borderWidth: 2
   },
   spotTitleSelected: {
-    color: TEXT_COLORS.INVERTED,
+    color: TEXT_COLORS.BODY,
     fontSize: 12,
     fontWeight: '600'
   },
@@ -79,11 +85,5 @@ const styles = StyleSheet.create({
     height: '90%',
     margin: 3,
     borderRadius: 10,
-  },
-  textNoResults: {
-    textAlign: 'center',
-    color: TEXT_COLORS.HEADER,
-    fontSize: 16,
-    fontWeight: '600'
-  },
+  }
 })

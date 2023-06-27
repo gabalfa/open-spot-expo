@@ -6,24 +6,24 @@ import { useFilters } from "../hooks/useFilters"
 import { useWeather } from "../hooks/useWeather"
 
 import { WeatherCard } from "./WeatherCard"
-import { ForecastCard } from "./ForecastCard";
+import { ForecastCard } from "./ForecastCard"
+import { Loading } from "./Loading"
 
 import { TEXT_COLORS } from "../constants/colors"
 
 export const DetailSpot = () => {
 
   const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
-  const { currentLocation, distance } = useLocation()
+  const { currentLocation, distance, loadingLocation } = useLocation()
   const { selectedRegion, showWeather } = useFilters()
 
   const isLocal = (currentLocation?.region === selectedRegion)
 
   return (
     <View style={styles.container}>
-
       {
         loadingWeather
-        ? <Text>{'Loading'}</Text>
+        ? <Loading />
         : <>
             {
               showWeather
@@ -32,11 +32,11 @@ export const DetailSpot = () => {
                   {
                     (isLocal 
                       ? <>
-                          <WeatherCard weather={weatherLocal} isLocal={isLocal} distance={distance} /> 
+                          <WeatherCard weather={weatherLocal} isLocal={isLocal} distance={distance} loadingLocation={loadingLocation} /> 
                           <ForecastCard forecast={forecastWeatherLocal} isLocal={isLocal}  />
                         </>
                       : <>
-                          <WeatherCard weather={weatherSpot} distance={distance} /> 
+                          <WeatherCard weather={weatherSpot} distance={distance} loadingLocation={loadingLocation} /> 
                           <ForecastCard forecast={forecastWeatherSpot} />
                         </>
                     )
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     height: '20%',
     borderRadius: 10,
     marginTop: 20,
-    padding: 10,
+    padding: 5,
     backgroundColor: TEXT_COLORS.TERTIARY,
   },
 })
