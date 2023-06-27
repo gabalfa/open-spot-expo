@@ -9,7 +9,7 @@ export function useWeather () {
   const {
     loadingWeather,
     setLoadingWeather,
-    currentLocation, selectedSpot,
+    currentLocation,
     destination,
     weatherLocal, setWeatherLocal,
     forecastWeatherLocal, setForecastWeatherLocal,
@@ -75,7 +75,7 @@ export function useWeather () {
     const hemisphereNorthern = ['Winter', 'Spring', 'Summer', 'Autumn'][d => Math.floor((d.getMonth() / 12 * 4)) % 4(new Date())]
     const hemisphereSouthern = ['Summer', 'Autumn', 'Winter', 'Spring'][d => Math.floor((d.getMonth() / 12 * 4)) % 4(new Date())]
 
-    return { hemisphereNorthern, hemisphereSouthern}
+    return { hemisphereNorthern, hemisphereSouthern }
   }
 
   return {

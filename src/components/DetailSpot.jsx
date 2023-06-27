@@ -8,57 +8,43 @@ import { useWeather } from "../hooks/useWeather"
 import { WeatherCard } from "./WeatherCard"
 import { ForecastCard } from "./ForecastCard";
 
-import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
+import { TEXT_COLORS } from "../constants/colors"
 
 export const DetailSpot = () => {
 
   const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
   const { currentLocation, distance } = useLocation()
-  const { selectedCountry, showWeather } = useFilters()
+  const { selectedRegion, showWeather } = useFilters()
 
-  const isLocal = ((currentLocation?.country) === (selectedCountry))
+  const isLocal = (currentLocation?.region === selectedRegion)
 
   return (
     <View style={styles.container}>
 
-      {/* {
-        showWeather
-        ?
-          <>
-            {
-              loadingWeather
-              ? <Text>{'Loading'}</Text>
-              : (isLocal ? <WeatherCard weather={weatherLocal} /> : <WeatherCard weather={weatherSpot} />)
-            }
-
-            {
-              loadingWeather
-                ? <Text>{'Loading'}</Text>
-                : (isLocal ? <ForecastCard forecast={forecastWeatherLocal} /> : <ForecastCard forecast={forecastWeatherSpot} />)
-            }
-          </>
-        : <Text>{'Stadistics'}</Text>
-        
-      } */}
-
       {
-        showWeather
-        ? 
-          <>
+        loadingWeather
+        ? <Text>{'Loading'}</Text>
+        : <>
             {
-              (isLocal 
-                ? <>
-                    <WeatherCard weather={weatherLocal} /> 
-                    <ForecastCard forecast={forecastWeatherLocal} />
-                  </>
-                : <>
-                    <WeatherCard weather={weatherSpot} /> 
-                    <ForecastCard forecast={forecastWeatherSpot} />
-                  </>
-              )
+              showWeather
+              ? 
+                <>
+                  {
+                    (isLocal 
+                      ? <>
+                          <WeatherCard weather={weatherLocal} isLocal={isLocal} distance={distance} /> 
+                          <ForecastCard forecast={forecastWeatherLocal} isLocal={isLocal}  />
+                        </>
+                      : <>
+                          <WeatherCard weather={weatherSpot} distance={distance} /> 
+                          <ForecastCard forecast={forecastWeatherSpot} />
+                        </>
+                    )
+                  }
+                </>
+              : <Text>{'Stadistics'}</Text>
             }
           </>
-        : <Text>{'Stadistics'}</Text>
       }
     </View>
   )
@@ -76,5 +62,4 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: TEXT_COLORS.TERTIARY,
   },
-
 })

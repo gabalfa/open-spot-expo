@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
@@ -27,7 +27,7 @@ export const MapSpots = () => {
     mapId, mapRef
   } = useLocation()
 
-  const { selectedCountry } = useFilters()
+  const { selectedRegion } = useFilters()
   
   const { spots } = useSpots()
 
@@ -72,7 +72,7 @@ export const MapSpots = () => {
         }
 
         {
-          ((currentLocation?.country) === (selectedCountry))
+          (currentLocation?.region === selectedRegion)
           ? <MapViewDirections
               apikey={MAPS_API_KEY}
               origin={{
