@@ -20,6 +20,7 @@ const ACTION_TYPES = {
   SET_DESTINATION: 'SET_DESTINATION',
   SET_DISTANCE: 'SET_DISTANCE',
 
+  SET_SHOW_WEATHER: 'SET_SHOW_WEATHER',
   SET_WEATHER_LOCAL: 'SET_WEATHER_LOCAL',
   SET_FORECAST_WEATHER_LOCAL: 'SET_FORECAST_WEATHER_LOCAL',
   SET_WEATHER_SPOT: 'SET_WEATHER_SPOT',
@@ -117,6 +118,13 @@ export const UPDATE_GENERAL_STATE = {
     }
   },
 
+  
+  [ACTION_TYPES.SET_SHOW_WEATHER]: (state, action) => {
+    return {
+      ...state,
+      showWeather: action.payload
+    }
+  },
   [ACTION_TYPES.SET_WEATHER_LOCAL]: (state, action) => {
     return {
       ...state,

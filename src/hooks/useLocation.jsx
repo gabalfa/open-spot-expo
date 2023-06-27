@@ -68,6 +68,7 @@ export function useLocation () {
             })
 
           })
+          .catch((error) => console.log('error:::', error))
 
       })
       .catch(error => console.warn('Error: permission to access location denied :::', error))

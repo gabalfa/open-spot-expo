@@ -21,6 +21,7 @@ export const initialState = {
   destination: undefined,
   distance: undefined,
 
+  showWeather: false,
   weatherLocal: undefined,
   forecastWeatherLocal: undefined,
 

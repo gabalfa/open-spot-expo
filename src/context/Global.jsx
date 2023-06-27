@@ -30,6 +30,7 @@ export function GlobalProvider ({ children }) {
     setDestination,
     setDistance,
 
+    setShowWeather,
     setWeatherLocal, 
     setForecastWeatherLocal,
     setWeatherSpot,
@@ -66,6 +67,7 @@ export function GlobalProvider ({ children }) {
       setDestination,
       setDistance,
 
+      setShowWeather,
       setWeatherLocal, 
       setForecastWeatherLocal,
       setWeatherSpot,

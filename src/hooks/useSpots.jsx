@@ -15,7 +15,8 @@ export function useSpots () {
     spots, setSpots,
     selectedRegion,
     selectedSpot, setSelectedSpot,
-    setOrigin, setDestination
+    setOrigin, setDestination,
+    setShowWeather
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -52,6 +53,7 @@ export function useSpots () {
   const handlerSelectedSpot = (item) => {
 
     setLoadingLocation(true)
+    setShowWeather(true)
 
     const updated = spots?.map((spot) => {
       if (spot.id === item.id) {

@@ -9,12 +9,13 @@ export function useWeather () {
   const {
     loadingWeather,
     setLoadingWeather,
-    currentLocation,
+    currentLocation, selectedSpot,
     destination,
     weatherLocal, setWeatherLocal,
     forecastWeatherLocal, setForecastWeatherLocal,
     weatherSpot, setWeatherSpot,
     forecastWeatherSpot, setForecastWeatherSpot,
+    setShowWeather
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function useWeather () {
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherLocal(data))
-      .catch()
+      .catch(() => setLoadingWeather(false))
       .finally(() => setLoadingWeather(false))
 
       fetch(
@@ -36,12 +37,12 @@ export function useWeather () {
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setForecastWeatherLocal(data))
-      .catch()
-      .finally(() => setLoadingWeather(false))
+      .catch(() => setLoadingWeather(false))
+      .finally(() => {setShowWeather(true); setLoadingWeather(false)})
 
     }
 
-  }, [])
+  }, [currentLocation])
 
   useEffect(() => {
 
@@ -54,7 +55,7 @@ export function useWeather () {
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherSpot(data))
-      .catch()
+      .catch(() => setLoadingWeather(false))
       .finally(() => setLoadingWeather(false))
 
       fetch(
@@ -62,15 +63,24 @@ export function useWeather () {
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setForecastWeatherSpot(data))
-      .catch()
-      .finally(() => setLoadingWeather(false))
+      .catch(() => setLoadingWeather(false))
+      .finally(() => {setShowWeather(true); setLoadingWeather(false)})
 
     }
 
   }, [destination])
 
+  const getSeason = () => {
+
+    const hemisphereNorthern = ['Winter', 'Spring', 'Summer', 'Autumn'][d => Math.floor((d.getMonth() / 12 * 4)) % 4(new Date())]
+    const hemisphereSouthern = ['Summer', 'Autumn', 'Winter', 'Spring'][d => Math.floor((d.getMonth() / 12 * 4)) % 4(new Date())]
+
+    return { hemisphereNorthern, hemisphereSouthern}
+  }
+
   return {
     loadingWeather,
+    getSeason,
     weatherLocal, forecastWeatherLocal,
     weatherSpot, forecastWeatherSpot
   }

@@ -76,6 +76,11 @@ export function useSpotReducer () {
     payload: distance
   })
 
+  const setShowWeather = showWeather => dispatch({
+    type: 'SET_SHOW_WEATHER',
+    payload: showWeather
+  })
+
   const setWeatherLocal = weatherLocal => dispatch({
     type: 'SET_WEATHER_LOCAL',
     payload: weatherLocal
@@ -104,6 +109,7 @@ export function useSpotReducer () {
     setVisibleModalFilter,
     setSelectedCountry, setSelectedRegion, setSelectedSpot,
     setOrigin, setDestination, setDistance,
+    setShowWeather,
     setWeatherLocal, setForecastWeatherLocal,
     setWeatherSpot, setForecastWeatherSpot,
     setLoadingLocation, setLoadingWeather

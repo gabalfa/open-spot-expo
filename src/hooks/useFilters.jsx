@@ -19,6 +19,7 @@ export function useFilters () {
     visibleModalFilter, setVisibleModalFilter,
     setDestination, setSelectedSpot,
     mapRef,
+    showWeather, setShowWeather,
     scrollCountriesRef,
   } = useContext(GlobalContext)
 
@@ -91,6 +92,8 @@ export function useFilters () {
       })
       .finally(() => setLoadingLocation(false))
 
+      setShowWeather(false)
+
   }
 
   const handleLayoutCountryFocus = (event, item) => {
@@ -127,7 +130,8 @@ export function useFilters () {
     regions, setRegions,
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
-    visibleModalFilter, setVisibleModalFilter
+    visibleModalFilter, setVisibleModalFilter,
+    showWeather, setShowWeather
   }
 
 }
