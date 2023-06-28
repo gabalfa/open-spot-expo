@@ -1,4 +1,8 @@
-{
+import 'dotenv/config'
+
+// console.log('process.env::', process.env)
+
+export default {
   "expo": {
     "plugins": [
       [
@@ -30,6 +34,13 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMaps": {
+          // "apiKey": "AIzaSyC2zOh4cyZDpjjZkN0Xak8JAApmFQRrWqU"
+          "apiKey": process.env.GOOGLE_SERVICES_JSON,
+        }
+      },
+      "googleServicesFile": process.env.GOOGLE_SERVICES_JSON,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
