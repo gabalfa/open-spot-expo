@@ -36,7 +36,6 @@ export default {
     "android": {
       "config": {
         "googleMaps": {
-          // "apiKey": "AIzaSyC2zOh4cyZDpjjZkN0Xak8JAApmFQRrWqU"
           "apiKey": process.env.GOOGLE_SERVICES_JSON,
         }
       },
