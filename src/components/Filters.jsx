@@ -2,15 +2,17 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
 
 import { useFilters } from "../hooks/useFilters"
+import { useConstants } from "../hooks/useConstants"
 
 import { ModalFilters } from "./ModalFilters"
-import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
+import { TEXT_COLORS } from "../constants/colors"
 
 const imageSearch = require('../../assets/openspot-images/icons8-search-64.png')
 const imageLocation = require('../../assets/openspot-images/icons8-location-64.png')
 
 export const Filters = () => {
 
+  const { HEADER } = useConstants()
   const { handlePressOpenModal } = useFilters()
 
   return (
@@ -23,7 +25,7 @@ export const Filters = () => {
 
           <View style={styles.searchFilter}>
             <Image style={styles.imageLocation} source={imageLocation}></Image>
-            <Text style={styles.textSearch}>{'Where to?'}</Text>
+            <Text style={styles.textSearch}>{HEADER.FILTER_PLACEHOLDER}</Text>
             <Image style={styles.imageSearch} source={imageSearch}></Image>
           </View>
 

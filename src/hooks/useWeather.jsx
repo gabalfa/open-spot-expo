@@ -4,9 +4,13 @@ import { GlobalContext } from '../context/Global'
 
 import { API_KEY_WEATHER } from '@env'
 
+const URL_WEATHER = 'https://api.openweathermap.org'
+const URL_WEATHER_IMG = 'https://openweathermap.org'
+
 export function useWeather () {
 
   const {
+    language,
     loadingWeather,
     setLoadingWeather,
     currentLocation,
@@ -25,7 +29,7 @@ export function useWeather () {
       setLoadingWeather(true)
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
+        `${URL_WEATHER}/data/2.5/weather?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherLocal(data))
@@ -33,7 +37,7 @@ export function useWeather () {
       .finally(() => setLoadingWeather(false))
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}`)
+        `${URL_WEATHER}/data/2.5/forecast?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setForecastWeatherLocal(data))
@@ -42,7 +46,7 @@ export function useWeather () {
 
     }
 
-  }, [currentLocation])
+  }, [currentLocation, language])
 
   useEffect(() => {
 
@@ -51,7 +55,7 @@ export function useWeather () {
       setLoadingWeather(true)
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
+        `${URL_WEATHER}/data/2.5/weather?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherSpot(data))
@@ -59,7 +63,7 @@ export function useWeather () {
       .finally(() => setLoadingWeather(false))
 
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}`)
+        `${URL_WEATHER}/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setForecastWeatherSpot(data))
@@ -68,7 +72,7 @@ export function useWeather () {
 
     }
 
-  }, [destination])
+  }, [destination, language])
 
   const getSeason = () => {
 
@@ -80,8 +84,9 @@ export function useWeather () {
 
   return {
     loadingWeather,
-    getSeason,
     weatherLocal, forecastWeatherLocal,
     weatherSpot, forecastWeatherSpot
   }
 }
+
+export const getURLWeatherImage = (image) => `${URL_WEATHER_IMG}/img/wn/${image}@4x.png`

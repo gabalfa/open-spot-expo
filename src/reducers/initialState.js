@@ -1,5 +1,7 @@
 export const initialState = {
 
+  language: 'EN',
+
   loadingLocation: false,
   loadingWeather: false,
   

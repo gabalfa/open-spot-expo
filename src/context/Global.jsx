@@ -1,5 +1,6 @@
 import { createContext, useId, useRef } from 'react'
 
+import { ConstantsProvider } from "./Constants"
 import { useSpotReducer } from "../reducers/spots"
 
 export const GlobalContext = createContext()
@@ -8,6 +9,8 @@ export function GlobalProvider ({ children }) {
 
   const { 
     state,
+
+    setLanguage,
 
     setLoadingLocation,
     setLoadingWeather,
@@ -46,6 +49,8 @@ export function GlobalProvider ({ children }) {
     <GlobalContext.Provider value={{
       ...state,
 
+      setLanguage,
+
       setLoadingLocation,
       setLoadingWeather,
 
@@ -77,9 +82,10 @@ export function GlobalProvider ({ children }) {
       scrollCountriesRef,
       mapRef, 
       
-    }}
-    >
-      {children}
+    }}>
+      <ConstantsProvider>
+        {children}
+      </ConstantsProvider>
     </GlobalContext.Provider>
   )
 }

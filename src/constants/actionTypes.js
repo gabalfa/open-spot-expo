@@ -1,5 +1,7 @@
 const ACTION_TYPES = {
 
+  SET_LANGUAGE: 'SET_LANGUAGE',
+
   SET_LOADING_LOCATION: 'SET_LOADING_LOCATION',
   SET_LOADING_WEATHER: 'SET_LOADING_WEATHER',
 
@@ -28,6 +30,13 @@ const ACTION_TYPES = {
 }
 
 export const UPDATE_GENERAL_STATE = {
+
+  [ACTION_TYPES.SET_LANGUAGE]: (state, action) => {
+    return {
+      ...state,
+      language: action.payload
+    }
+  },
 
   [ACTION_TYPES.SET_LOADING_LOCATION]: (state, action) => {
     return {

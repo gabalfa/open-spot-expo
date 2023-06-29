@@ -55,9 +55,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 5,
     margin: 5,
-    borderColor: TEXT_COLORS.HEADER,
-    borderWidth: 2
-    // backgroundColor: TEXT_COLORS.TERTIARY,
+    backgroundColor: BACKGROUND_COLORS.BLANK,
+    shadowColor: TEXT_COLORS.HEADER,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: .5,
+    shadowRadius: 10,
+    overflow: Platform.OS !== 'ios' && 'hidden'
   },
   card: {
     justifyContent: 'space-between',

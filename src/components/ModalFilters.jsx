@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View, Modal, Pressable, ScrollView } from 'react-native'
 import React from 'react'
 
+import { useConstants } from "../hooks/useConstants"
 import { useFilters } from "../hooks/useFilters"
 import { useSpots } from "../hooks/useSpots"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
 export const ModalFilters = () => {
+
+  const { FILTER_MODAL } = useConstants()
 
   const {
     handleSelectedCountry,
@@ -28,7 +31,7 @@ export const ModalFilters = () => {
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <Text style={styles.textHeader}>{'Please select a location'}</Text>
+          <Text style={styles.textHeader}>{FILTER_MODAL.TITLE}</Text>
         </View>
 
         <View style={styles.filter}>
@@ -88,7 +91,7 @@ export const ModalFilters = () => {
           <Pressable
             style={styles.buttonClose}
             onPress={handlePressCloseModal}>
-              <Text style={styles.textStyle}>{'Done!'}</Text>
+              <Text style={styles.textStyle}>{FILTER_MODAL.CLOSE_BUTTON}</Text>
           </Pressable>
 
         </View>

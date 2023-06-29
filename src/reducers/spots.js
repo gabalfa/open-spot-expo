@@ -6,6 +6,11 @@ export function useSpotReducer () {
   
   const [state, dispatch] = useReducer(spotsReducer, initialState)
 
+  const setLanguage = language => dispatch({
+    type: 'SET_LANGUAGE',
+    payload: language
+  })
+
   const setLoadingLocation = loadingLocation => dispatch({
     type: 'SET_LOADING_LOCATION',
     payload: loadingLocation
@@ -102,8 +107,9 @@ export function useSpotReducer () {
   })
 
   return { 
-    state, 
+    state,
     requestForegroundPermissionsAsync,
+    setLanguage,
     setCurrentLocation,
     setSpots, setCountries, setRegions,
     setVisibleModalFilter,

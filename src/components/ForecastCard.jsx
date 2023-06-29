@@ -1,29 +1,35 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React from 'react'
 
+import { useConstants } from "../hooks/useConstants"
+import { getURLWeatherImage } from "../hooks/useWeather"
+
 import { TEXT_COLORS } from "../constants/colors"
 
 export const ForecastCard = ({forecast}) => {
+
+  const { SPOT_DETAIL } = useConstants()
+
   return (
     <View style={styles.container}>
 
-      <Text style={styles.forecastTitle}>{`Forecast`}</Text>
+      <Text style={styles.forecastTitle}>{SPOT_DETAIL.FORECAST}</Text>
       
       <ScrollView>
         {
           forecast?.list.slice(0, 7).map((item, index) => (
             <View key={index} style={styles.row}>
 
-              <Text style={styles.temperatureText}>
+              <Text style={styles.weatherTime}>
                 {`${item?.dt_txt.substring(item?.dt_txt.length - 8, item?.dt_txt.length - 3)}`}
               </Text>
 
               <Image 
                 style={styles.imageWeather} 
-                source={{uri: `https://openweathermap.org/img/wn/${item?.weather[0].icon}@4x.png`}}
+                source={{uri: getURLWeatherImage(item?.weather[0].icon)}}
               />
 
-              <Text style={styles.temperatureText}>{`${item?.weather[0].main}`}</Text>
+              <Text style={styles.weatherDescription}>{`${item?.weather[0].description}`}</Text>
 
             </View>
           ))
@@ -36,6 +42,7 @@ export const ForecastCard = ({forecast}) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '50%',
 
   },
   row: {
@@ -45,8 +52,8 @@ const styles = StyleSheet.create({
     height: 25,
   },
   imageWeather: {
-      width: 35,
-      height: 35,
+    width: 35,
+    height: 35,
   },
   containerCurrent: {
     justifyContent: 'space-between',
@@ -65,11 +72,6 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 5,
   },
-  temperatureText: {
-    color: TEXT_COLORS.INVERTED,
-    fontSize: 12,
-  },
-
   imageTemperature: {
     width: 35,
     height: 35,
@@ -81,14 +83,20 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   forecastTitle: {
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     color: TEXT_COLORS.INVERTED,
     fontSize: 16,
     fontWeight: '600'
   },
+  weatherTime: {
+    color: TEXT_COLORS.INVERTED,
+    fontSize: 10,
+    textAlign: 'right',
+    width: 30
+  },
   weatherDescription: {
     color: TEXT_COLORS.INVERTED,
-    fontSize: 12,
+    fontSize: 10,
   },
      
 })

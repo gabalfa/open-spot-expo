@@ -14,6 +14,7 @@ export const TEXT_COLORS = {
     TERTIARY: '#5F5D5D',
     ERROR: '#BC001F',
     INVERTED: '#FFFFFF',
-    SUCCESS: '#004F29',
-    INTERACTIVE: '#1370BC'
+    INTERACTIVE: '#1370BC',
+    BLUE_SWITCH: '#81b0ff',
+    YELLOW_SWITCH: '#F3E462',
 }

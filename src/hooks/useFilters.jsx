@@ -11,6 +11,8 @@ import { GlobalContext } from '../context/Global'
 export function useFilters () {
 
   const {
+    language,
+    setLanguage,
     setLoadingLocation,
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
@@ -125,6 +127,8 @@ export function useFilters () {
     handleLayoutCountryFocus,
     handlePressCloseModal,
     handlePressOpenModal,
+    language,
+    setLanguage,
     scrollCountriesRef,
     countries, setCountries,
     regions, setRegions,

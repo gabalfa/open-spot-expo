@@ -1,28 +1,32 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
+import { useConstants } from "../hooks/useConstants"
+import { getURLWeatherImage } from "../hooks/useWeather"
+
 import { TEXT_COLORS } from "../constants/colors"
 
 const imgTemperature = require('../../assets/openspot-images/icons8-temperature-64.png')
 
-export const WeatherCard = ({ weather, isLocal, distance, loadingLocation }) => {
+export const WeatherCard = ({ weather, isLocal, distance }) => {
+  const { SPOT_DETAIL } = useConstants()
   return (
     <View style={styles.container}>
 
-      <Text style={styles.forecastTitle}>{`Now`}</Text>
+      <Text style={styles.forecastTitle}>{SPOT_DETAIL.WEATHER_NOW}</Text>
 
       <View style={styles.row}>
 
         <Image 
           style={styles.imageWeather} 
-          source={{uri: `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@4x.png`}}
+          source={{uri: getURLWeatherImage(weather?.weather[0].icon)}}
         />
 
         <Text style={styles.temperatureText}>
             {`${Math.round(parseFloat(weather?.main.temp) - 273.15)}°C`}
         </Text>
 
-        <Image style={styles.imageTemperature} source={imgTemperature}></Image>
+        {/* <Image style={styles.imageTemperature} source={imgTemperature}></Image> */}
           
       </View>
 
@@ -36,12 +40,12 @@ export const WeatherCard = ({ weather, isLocal, distance, loadingLocation }) => 
         <Text style={styles.textDistance}>
           {
             distance === undefined
-            ? <>{'Your location'}</>
+            ? <>{SPOT_DETAIL.YOUR_LOCATION}</>
             : <>
                 {
                   isLocal
-                  ? `${distance?.toFixed(2)} km away from you`
-                  : `${distance?.toFixed(2)} km to centre of city`
+                  ? `${distance?.toFixed(2)} ${SPOT_DETAIL.AWAY_FROM_YOU}`
+                  : `${distance?.toFixed(2)} ${SPOT_DETAIL.AWAY_FROM_CENTRE}`
                 }
               </>
           }
@@ -54,10 +58,11 @@ export const WeatherCard = ({ weather, isLocal, distance, loadingLocation }) => 
 
 const styles = StyleSheet.create({
   container: {
-
+    width: '50%',
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   imageWeather: {
@@ -85,8 +90,8 @@ const styles = StyleSheet.create({
   },
 
   imageTemperature: {
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
   },
   currentTitle: {
     color: TEXT_COLORS.INVERTED,
@@ -95,19 +100,19 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   forecastTitle: {
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     color: TEXT_COLORS.INVERTED,
     fontSize: 16,
     fontWeight: '600'
   },
   weatherDescription: {
     color: TEXT_COLORS.INVERTED,
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600'
   },
   textDistance: {
     marginTop: 5,
     color: TEXT_COLORS.INVERTED,
-    fontSize: 12,
+    fontSize: 10,
   },
 })

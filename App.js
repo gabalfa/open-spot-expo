@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet } from 'react-native'
-import {registerRootComponent} from 'expo';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { GlobalProvider } from "./src/context/Global"
@@ -18,9 +17,9 @@ export default function App() {
       
       <GlobalProvider>
 
-        <Header />
-        
-        <Spots />
+          <Header />
+          
+          <Spots />
 
       </GlobalProvider>
 
