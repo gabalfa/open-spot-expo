@@ -43,7 +43,6 @@ export const ForecastCard = ({forecast}) => {
 const styles = StyleSheet.create({
   container: {
     width: '50%',
-
   },
   row: {
     flexDirection: 'row',
@@ -55,38 +54,12 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
   },
-  containerCurrent: {
-    justifyContent: 'space-between',
-    width: '50%',
-    height: '100%',
-  },
-  weatherContainer: {
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 5,
-  },
-  temperatureContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: 40,
-    marginBottom: 5,
-  },
-  imageTemperature: {
-    width: 35,
-    height: 35,
-  },
-  currentTitle: {
-    color: TEXT_COLORS.INVERTED,
-    alignSelf: 'flex-start',
-    fontSize: 16,
-    fontWeight: '600'
-  },
   forecastTitle: {
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     color: TEXT_COLORS.INVERTED,
     fontSize: 16,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginLeft: 20
   },
   weatherTime: {
     color: TEXT_COLORS.INVERTED,
@@ -98,5 +71,4 @@ const styles = StyleSheet.create({
     color: TEXT_COLORS.INVERTED,
     fontSize: 10,
   },
-     
 })

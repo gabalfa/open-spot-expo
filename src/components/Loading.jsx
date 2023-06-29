@@ -1,11 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import React from 'react'
 
 import { TEXT_COLORS } from "../constants/colors"
 
-export const Loading = () => {
-  return (<Text style={styles.textLoading}>{'Loading'}</Text>)
-}
+export const Loading = () => <Text style={styles.textLoading}>{'Loading'}</Text>
 
 const styles = StyleSheet.create({
     textLoading: {

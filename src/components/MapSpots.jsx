@@ -1,4 +1,4 @@
-import { StyleSheet, View, Platform, Text, Image } from 'react-native'
+import { StyleSheet, View, Platform, Text } from 'react-native'
 import React from 'react'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
@@ -40,7 +40,6 @@ export const MapSpots = () => {
         ref={mapRef}
         style={styles.map}
         // provider={PROVIDER_GOOGLE}
-        // loadingEnabled={true}
         initialRegion={origin}
         onMapLoaded={() => setLoadingLocation(false)}
         onMapReady={() => handleMapReady()}
@@ -168,9 +167,5 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     fontWeight: 'bold', 
     color: TEXT_COLORS.INVERTED
-  },
-  imageMarker: {
-    height: 20,
-    width: 20, 
   },
 })

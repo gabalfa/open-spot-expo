@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Switch } from 'react-native'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import { useFilters } from "../hooks/useFilters"
 import { useConstants } from "../hooks/useConstants"
@@ -19,10 +19,6 @@ export const Header = () => {
   } = useFilters()
 
   const [isEnabled, setIsEnabled] = useState(false)
-  const toggleSwitch = () => {
-    setLanguage(!isEnabled ? 'ES' : 'EN')
-    setIsEnabled(previousState => !previousState)
-  }
 
   return (
     <View style={styles.header}>
@@ -47,7 +43,10 @@ export const Header = () => {
             trackColor={{false: TEXT_COLORS.BLUE_SWITCH, true: TEXT_COLORS.YELLOW_SWITCH}}
             thumbColor={isEnabled ? TEXT_COLORS.HEADER : TEXT_COLORS.HEADER}
             ios_backgroundColor={TEXT_COLORS.BLUE_SWITCH}
-            onValueChange={toggleSwitch}
+            onValueChange={() => {
+              setLanguage(!isEnabled ? 'ES' : 'EN')
+              setIsEnabled(previousState => !previousState)
+            }}
             value={isEnabled}
           />
 

@@ -15,19 +15,15 @@ export const Spots = () => {
   
   return (
     <View style={styles.spots}>
-
       {
         foregroundPermissionsAsync?.status === "granted"
-        ? 
-        <>
-          <DetailSpot />
-          <MapSpots />
-          <Carousel />
-          
-        </>
+        ? <>
+            <DetailSpot />
+            <MapSpots />
+            <Carousel />
+          </>
         : <></>
       }
-
     </View>
   )
 }

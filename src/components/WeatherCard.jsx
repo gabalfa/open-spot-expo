@@ -6,14 +6,12 @@ import { getURLWeatherImage } from "../hooks/useWeather"
 
 import { TEXT_COLORS } from "../constants/colors"
 
-const imgTemperature = require('../../assets/openspot-images/icons8-temperature-64.png')
-
 export const WeatherCard = ({ weather, isLocal, distance }) => {
   const { SPOT_DETAIL } = useConstants()
   return (
     <View style={styles.container}>
 
-      <Text style={styles.forecastTitle}>{SPOT_DETAIL.WEATHER_NOW}</Text>
+      <Text style={styles.weatherTitle}>{SPOT_DETAIL.WEATHER_NOW}</Text>
 
       <View style={styles.row}>
 
@@ -25,8 +23,6 @@ export const WeatherCard = ({ weather, isLocal, distance }) => {
         <Text style={styles.temperatureText}>
             {`${Math.round(parseFloat(weather?.main.temp) - 273.15)}°C`}
         </Text>
-
-        {/* <Image style={styles.imageTemperature} source={imgTemperature}></Image> */}
           
       </View>
 
@@ -69,37 +65,15 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
   },
-  containerCurrent: {
-    justifyContent: 'space-between',
-    width: '50%',
-    height: '100%',
-  },
-  weatherContainer: {
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  temperatureContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: 40,
-  },
   temperatureText: {
     color: TEXT_COLORS.INVERTED,
     fontSize: 20,
   },
-
   imageTemperature: {
     width: 20,
     height: 20,
   },
-  currentTitle: {
-    color: TEXT_COLORS.INVERTED,
-    alignSelf: 'flex-start',
-    fontSize: 16,
-    fontWeight: '600'
-  },
-  forecastTitle: {
+  weatherTitle: {
     alignSelf: 'center',
     color: TEXT_COLORS.INVERTED,
     fontSize: 16,
