@@ -54,9 +54,7 @@ export const ModalFilters = () => {
                     >
                       <Text style={styles.textStyle}>{item.name}</Text>
                     </Pressable>
-
                   </View>
-
                 ))
               }
             </ScrollView>

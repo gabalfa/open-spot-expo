@@ -6,7 +6,7 @@ import { getURLWeatherImage } from "../hooks/useWeather"
 
 import { TEXT_COLORS } from "../constants/colors"
 
-export const ForecastCard = ({forecast}) => {
+export default ForecastCard = ({forecast}) => {
 
   const { SPOT_DETAIL } = useConstants()
 

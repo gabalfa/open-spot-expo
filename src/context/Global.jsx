@@ -44,6 +44,7 @@ export function GlobalProvider ({ children }) {
   const mapId = useId()
   const mapRef = useRef()
   const scrollCountriesRef = useRef()
+  const scrollSpotsRef = useRef()
 
   return (
     <GlobalContext.Provider value={{
@@ -80,6 +81,7 @@ export function GlobalProvider ({ children }) {
 
       mapId, 
       scrollCountriesRef,
+      scrollSpotsRef,
       mapRef, 
       
     }}>

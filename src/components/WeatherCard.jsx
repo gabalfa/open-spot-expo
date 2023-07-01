@@ -2,12 +2,14 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
 import { useConstants } from "../hooks/useConstants"
-import { getURLWeatherImage } from "../hooks/useWeather"
+
+import { getURLWeatherImage, calculateCelsiusTemperature } from "../hooks/useWeather"
 
 import { TEXT_COLORS } from "../constants/colors"
 
-export const WeatherCard = ({ weather, isLocal, distance }) => {
+export default WeatherCard = ({ weather, distance }) => {
   const { SPOT_DETAIL } = useConstants()
+ 
   return (
     <View style={styles.container}>
 
@@ -21,7 +23,7 @@ export const WeatherCard = ({ weather, isLocal, distance }) => {
         />
 
         <Text style={styles.temperatureText}>
-            {`${Math.round(parseFloat(weather?.main.temp) - 273.15)}°C`}
+            {calculateCelsiusTemperature(weather?.main.temp)}
         </Text>
           
       </View>
@@ -37,13 +39,7 @@ export const WeatherCard = ({ weather, isLocal, distance }) => {
           {
             distance === undefined
             ? <>{SPOT_DETAIL.YOUR_LOCATION}</>
-            : <>
-                {
-                  isLocal
-                  ? `${distance?.toFixed(2)} ${SPOT_DETAIL.AWAY_FROM_YOU}`
-                  : `${distance?.toFixed(2)} ${SPOT_DETAIL.AWAY_FROM_CENTRE}`
-                }
-              </>
+            : <>{`${distance?.toFixed(2)} ${SPOT_DETAIL.AWAY_FROM_CENTRE}`}</>
           }
         </Text>
       </View>

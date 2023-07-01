@@ -1,17 +1,18 @@
 import { StyleSheet, View, Text } from 'react-native'
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 
 import { useLocation } from "../hooks/useLocation"
 import { useFilters } from "../hooks/useFilters"
 import { useWeather } from "../hooks/useWeather"
 
-import { WeatherCard } from "./WeatherCard"
-import { ForecastCard } from "./ForecastCard"
+const WeatherCard = lazy(() => import('./WeatherCard'))
+const ForecastCard = lazy(() => import('./ForecastCard'))
+
 import { Loading } from "./Loading"
 
 import { TEXT_COLORS } from "../constants/colors"
 
-export const DetailSpot = () => {
+export default DetailSpot = () => {
 
   const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
   const { currentLocation, distance, loadingLocation } = useLocation()
@@ -21,31 +22,27 @@ export const DetailSpot = () => {
 
   return (
     <View style={styles.container}>
-      {
-        loadingWeather
-        ? <Loading />
-        : <>
-            {
-              showWeather
-              ? 
-                <>
-                  {
-                    (isLocal 
-                      ? <>
-                          <WeatherCard weather={weatherLocal} isLocal={isLocal} distance={distance} loadingLocation={loadingLocation} /> 
-                          <ForecastCard forecast={forecastWeatherLocal} isLocal={isLocal}  />
-                        </>
-                      : <>
-                          <WeatherCard weather={weatherSpot} distance={distance} loadingLocation={loadingLocation} /> 
-                          <ForecastCard forecast={forecastWeatherSpot} />
-                        </>
-                    )
-                  }
-                </>
-              : <Text>{'Stadistics'}</Text>
-            }
-          </>
-      }
+      <Suspense fallback={<Loading />}>
+        {
+          showWeather
+          ? 
+            <>
+              {
+                (isLocal 
+                  ? <>
+                      <WeatherCard weather={weatherLocal} distance={distance} loadingLocation={loadingLocation} /> 
+                      <ForecastCard forecast={forecastWeatherLocal}  />
+                    </>
+                  : <>
+                      <WeatherCard weather={weatherSpot} distance={distance} loadingLocation={loadingLocation} /> 
+                      <ForecastCard forecast={forecastWeatherSpot} />
+                    </>
+                )
+              }
+            </>
+          : <Text>{'Stadistics'}</Text>
+        }
+      </Suspense>
     </View>
   )
 }

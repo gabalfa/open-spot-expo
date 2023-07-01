@@ -1,5 +1,5 @@
 import { Alert } from 'react-native'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
 import { database } from "../config/fb"
@@ -14,11 +14,12 @@ export function useFilters () {
     language,
     setLanguage,
     setLoadingLocation,
+    setOrigin,
     selectedCountry, setSelectedCountry,
     selectedRegion, setSelectedRegion,
     countries, setCountries,
     regions, setRegions,
-    visibleModalFilter, setVisibleModalFilter,
+    visibleModalFilter, setVisibleModalFilter,  
     setDestination, setSelectedSpot,
     mapRef,
     showWeather, setShowWeather,
@@ -74,8 +75,6 @@ export function useFilters () {
     setSelectedCountry(item.name)
     setRegions(item.regions)
     setSelectedRegion('')
-    setDestination(undefined)
-    setSelectedSpot('')
   }
 
   const handleSelectedRegion = (region) => {
@@ -88,17 +87,17 @@ export function useFilters () {
         mapRef.current.animateToRegion({
           longitude: location[0].longitude,
           latitude: location[0].latitude,
-          longitudeDelta: 1,
-          latitudeDelta: 1
+          longitudeDelta: 0.5,
+          latitudeDelta: 0.5,
         }, 1000)
+        setOrigin(undefined)
+        setDestination(undefined)
       })
       .finally(() => setLoadingLocation(false))
-
       setShowWeather(false)
-
   }
 
-  const handleLayoutCountryFocus = (event, item) => {
+  const handleLayoutCountryFocus = useCallback((event, item) => {
 
     if (item.name === selectedCountry) {
       const layout = event.nativeEvent.layout
@@ -110,7 +109,7 @@ export function useFilters () {
       scrollCountriesRef.current.flashScrollIndicators()
     } 
 
-  }
+  })
 
   const handlePressCloseModal = () => {
     if (selectedRegion.length > 0) {

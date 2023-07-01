@@ -16,7 +16,7 @@ const imageOrigin = require('../../assets/openspot-images/icons8-location-100.pn
 const imageSelectedSpot = require('../../assets/openspot-images/icons8-location-80.png')
 const imageDestination = require('../../assets/openspot-images/icons8-location-64-2.png')
 
-export const MapSpots = () => {
+export default MapSpots = () => {
 
   const {
     handleMapReady,
@@ -29,7 +29,6 @@ export const MapSpots = () => {
   } = useLocation()
 
   const { selectedRegion } = useFilters()
-  
   const { spots, handlerSelectedSpot } = useSpots()
 
   return (
@@ -40,7 +39,6 @@ export const MapSpots = () => {
         ref={mapRef}
         style={styles.map}
         // provider={PROVIDER_GOOGLE}
-        initialRegion={origin}
         onMapLoaded={() => setLoadingLocation(false)}
         onMapReady={() => handleMapReady()}
       >
@@ -52,8 +50,8 @@ export const MapSpots = () => {
                 coordinate={{
                   latitude: currentLocation?.latitude, 
                   longitude: currentLocation?.longitude, 
-                  longitudeDelta: 1,
-                  latitudeDelta: 1
+                  longitudeDelta: 0.5,
+                  latitudeDelta: 0.5
                 }}>
                   <View style={{backgroundColor: 'white', borderRadius: 2, padding: 2, opacity: .8}}>
                     <Text style={{fontSize: 8, textAlign: 'center' }}>{'You are here!'}</Text>
@@ -63,16 +61,16 @@ export const MapSpots = () => {
         }
 
         {
-          spots.map((item) => (
+          spots.map((item, index) => (
             <Marker 
               key={item.id}
-              onPress={() => handlerSelectedSpot(item)}
+              onPress={() => handlerSelectedSpot(item, index)}
               image={item.selected ? imageSelectedSpot : imageDestination}
               coordinate={{
                 latitude: item.location.latitude, 
                 longitude: item.location.longitude, 
-                longitudeDelta: 1,
-                latitudeDelta: 1
+                longitudeDelta: 0.5,
+                latitudeDelta: 0.5
               }}>
                 <View style={item.selected ? styles.markerSelected : styles.marker}> 
                   <Text style={item.selected ? styles.markerTextSelected: styles.markerText}>{item.name}</Text>
@@ -81,33 +79,15 @@ export const MapSpots = () => {
           ))
         }
 
-        {
-          (currentLocation?.region === selectedRegion)
-          ? <MapViewDirections
-              apikey={MAPS_API_KEY}
-              origin={{
-                longitude: currentLocation.longitude,
-                latitude: currentLocation.latitude,
-                longitudeDelta: currentLocation.longitudeDelta,
-                latitudeDelta: currentLocation.latitudeDelta,
-              }}
-              destination={destination}
-              strokeColor={BACKGROUND_COLORS.HEADER}
-              strokeWidth={3}
-              mode={'DRIVING'}
-              precision={'high'}
-              onReady={(result) => handleDirectionsReady(result)}
-            />
-          : <MapViewDirections
-              apikey={MAPS_API_KEY}
-              origin={origin}
-              destination={destination}
-              strokeColor={BACKGROUND_COLORS.BLANK}
-              strokeWidth={3}
-              mode={'WALKING'}
-              onReady={(result) => handleDirectionsReady(result)}
-            />
-        }
+        <MapViewDirections
+          apikey={MAPS_API_KEY}
+          origin={origin}
+          destination={destination}
+          strokeColor={BACKGROUND_COLORS.HEADER}
+          strokeWidth={2}
+          mode={'WALKING'}
+          onReady={(result) => handleDirectionsReady(result)}
+        />
 
       </MapView>
 

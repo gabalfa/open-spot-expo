@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 
 import { GlobalContext } from '../context/Global'
 
@@ -11,6 +11,7 @@ export function useWeather () {
 
   const {
     language,
+    selectedSpot,
     loadingWeather,
     setLoadingWeather,
     currentLocation,
@@ -25,7 +26,7 @@ export function useWeather () {
   useEffect(() => {
     
     if (currentLocation !== undefined) {
-
+      
       setLoadingWeather(true)
 
       fetch(
@@ -49,13 +50,13 @@ export function useWeather () {
   }, [currentLocation, language])
 
   useEffect(() => {
-
-    if (destination !== undefined) {
+    
+    if (selectedSpot !== undefined) {
 
       setLoadingWeather(true)
 
       fetch(
-        `${URL_WEATHER}/data/2.5/weather?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
+        `${URL_WEATHER}/data/2.5/weather?lat=${selectedSpot?.location?.latitude}&lon=${selectedSpot?.location?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setWeatherSpot(data))
@@ -63,7 +64,7 @@ export function useWeather () {
       .finally(() => setLoadingWeather(false))
 
       fetch(
-        `${URL_WEATHER}/data/2.5/forecast?lat=${destination?.latitude}&lon=${destination?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
+        `${URL_WEATHER}/data/2.5/forecast?lat=${selectedSpot?.location?.latitude}&lon=${selectedSpot?.location?.longitude}&appid=${API_KEY_WEATHER}&lang=${language}`)
       .then((response) => response.json())
       .then((json) => json)
       .then((data) => setForecastWeatherSpot(data))
@@ -72,7 +73,7 @@ export function useWeather () {
 
     }
 
-  }, [destination, language])
+  }, [selectedSpot, language])
 
   const getSeason = () => {
 
@@ -89,4 +90,7 @@ export function useWeather () {
   }
 }
 
+export const calculateCelsiusTemperature = (temp) => `${Math.round(parseFloat(temp) - 273.15)}°C` 
+
 export const getURLWeatherImage = (image) => `${URL_WEATHER_IMG}/img/wn/${image}@4x.png`
+

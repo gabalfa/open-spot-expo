@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 
 import * as Location from "expo-location"
 
@@ -39,7 +39,7 @@ export function useLocation () {
 
   }, [origin])
 
-  const handleMapReady = () => {
+  const handleMapReady = useCallback(() => {
 
     Location.getCurrentPositionAsync({})
       .then((location) => {
@@ -73,9 +73,9 @@ export function useLocation () {
       })
       .catch(error => console.warn('Error: permission to access location denied :::', error))
       .finally(() => setLoadingLocation(false))
-  }
+  })
 
-  const handleDirectionsReady = (result) => {
+  const handleDirectionsReady = useCallback((result) => {
 
     setDistance(result.distance)
 
@@ -89,7 +89,7 @@ export function useLocation () {
     })
 
     setLoadingLocation(false)
-  }
+  })
 
   return {
     handleMapReady,

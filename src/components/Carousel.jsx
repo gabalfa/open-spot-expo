@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image, FlatList, Pressable } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView, Pressable } from 'react-native'
 import React from 'react'
 
 import { useSpots } from "../hooks/useSpots"
@@ -7,37 +7,47 @@ import { Loading } from "./Loading"
 
 import { BACKGROUND_COLORS, TEXT_COLORS } from "../constants/colors"
 
-export const Carousel = () => {
+export default Carousel = () => {
 
-  const { handlerSelectedSpot, spots } = useSpots()
+  const { 
+    scrollSpotsRef, 
+    handlerSelectedSpot, spots 
+  } = useSpots()
 
   return (
     <View style={styles.container}>
-      {
-        spots.length > 0
-        ? <FlatList
-            scrollEnabled={true}
-            horizontal={true}
-            data={spots}
-            renderItem={({item}) => (
-              <Pressable 
-                key={item.guid} 
-                onPress={() => handlerSelectedSpot(item)}
+
+      <ScrollView
+        ref={scrollSpotsRef}
+        horizontal={true}
+      >
+        {
+          spots.map((item, index) => 
+          (
+            <View
+              key={item.id}
+            >
+              <Pressable
+                style={item.selected ? styles.cardSelected : styles.card}
+                onPress={() => handlerSelectedSpot(item, index)}
               >
-                <View style={item.selected ? styles.cardSelected : styles.card}>
-                  <Text style={item.selected ? styles.spotTitleSelected : styles.spotTitle}>
-                    {item.name}
-                  </Text>
-                  <Image 
-                    style={styles.spotImage}
-                    source={{uri: item.images[0]}}
-                  />
-                </View>
+
+                <Text style={item.selected ? styles.spotTitleSelected : styles.spotTitle}>
+                  {item.name}
+                </Text>
+
+                <Image 
+                  style={styles.spotImage}
+                  source={{uri: item.images[0]}}
+                />
+
               </Pressable>
-            )}
-          />
-        : <Loading />
-      }
+
+            </View>
+          ))
+        }
+      </ScrollView>
+
     </View>
   )
 }
