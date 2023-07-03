@@ -1,13 +1,10 @@
 # Open Spot
-___
 
 ## About this repository
 
 This repository contains the source code and related documentation for the Open Spot app.
 
 Open Spot is a mobile application that allows athletes and sports enthusiasts to discover and locate ideal training spots for their favourite sports. 
-
-----
 
 ### Install steps
 
