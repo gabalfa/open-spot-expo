@@ -11,7 +11,7 @@ I began this project as a way to show proficiency in technical and soft skills, 
 Throughout this development I've learned about, graphic design, user experience, mobile software development, frontend architecture patterns, Javascript, Maps API, and Firebase, in addition, to solving many technical troubles related to development and deployment.
 
 ## Features
-- It shows Spots (places to train and work out) by a selected region. 
+- It shows Open Spots (places to train and work out) by a selected region. 
 - It brings to you, information about climate and forecast, in your current location or about a selected spot.
 
 ## What is cooking?
@@ -36,9 +36,7 @@ npx expo start
 
 This App was developed with Javascript, React-Native, Expo, Google Maps and Firebase.
 
-
 ![react native](https://img.icons8.com/nolan/64/react-native.png)
-![expo](https://bitrise-steplib-collection.s3.amazonaws.com/steps/expo-detach/assets/icon.svg)
 ![javascript](https://img.icons8.com/color/48/javascript--v1.png)
 ![firestore](https://img.icons8.com/color/48/firebase.png)
 ![maps](https://img.icons8.com/color/48/google-maps-new.png)
