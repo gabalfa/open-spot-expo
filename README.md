@@ -32,6 +32,9 @@ npm install
 npx expo start
 ```
 
+4. Provide the secrets for each API key, as you can see in the file .dev.example
+5. Have a Firebase backend with correct data
+
 ### Stack
 
 This App was developed with Javascript, React-Native, Expo, Google Maps and Firebase.
