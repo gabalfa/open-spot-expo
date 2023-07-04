@@ -10,6 +10,15 @@ I began this project as a way to show proficiency in technical and soft skills, 
 
 Throughout this development I've learned about, graphic design, user experience, mobile software development, frontend architecture patterns, Javascript, Maps API, and Firebase, in addition, to solving many technical troubles related to development and deployment.
 
+## Features
+- It shows Spots (places to train and workout) by a selected region. 
+- It brings to you, information about climate and forecast, in your current location or about a selected spot.
+
+## What is cooking?
+Currently, I'm working around new features, such as:
+- The user is able to add open spots, this needs an IA implementation to analyse user inputs such as images and text.
+- Give suggestions about the best open spot to work out, taking into account climate and distance.
+
 ### Install steps
 
 To run this code you need:
