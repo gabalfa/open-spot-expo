@@ -3,9 +3,9 @@ This repository contains the source code and related documentation for the Open 
 Open Spot is a mobile application that allows athletes and sports enthusiasts to discover and locate ideal training spots for their favourite sports. 
 
 ## Motivations
-### have a personal software development project
+### Have a personal software development project
 I began this project as a way to show proficiency in technical skills, so, I included technical topics such as state management, and hooks implementation, to solve requirements such as multilanguage, forecast climate, and a flow user experience.
-### Learn and train
+### Learning and training
 Throughout this development I've learned about, graphic design, user experience, mobile software development, frontend architecture patterns, Javascript, Maps API, and Firebase, in addition, to solving many technical troubles related to development and deployment.
 
 ## Features
