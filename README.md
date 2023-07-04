@@ -23,7 +23,7 @@ Currently, I'm working around new features, such as:
 
 To run this code you need:
 1. Install [Node.js](https://nodejs.org/en)
-2. For virtual devices [Expo Go](https://docs.expo.dev/get-started/expo-go/)
+2. For virtual devices follow this guide [Expo Go](https://docs.expo.dev/get-started/expo-go/)
 3. Run the following commands on the terminal:
 ```
 git clone HTTP://github/gabalfa/open-spot-expo
