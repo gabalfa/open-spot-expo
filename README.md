@@ -36,6 +36,7 @@ npx expo start
 
 ### Stack
 This app is developed with Javascript, React-Native, Expo, Google Maps and Firebase.
+
 ![javascript](https://img.icons8.com/color/48/javascript--v1.png)
 ![react native](https://img.icons8.com/nolan/64/react-native.png)
 ![firestore](https://img.icons8.com/color/48/firebase.png)
