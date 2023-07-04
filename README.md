@@ -16,7 +16,8 @@ Throughout this development I've learned about, graphic design, user experience,
 
 ## What is cooking?
 Currently, I'm working around new features, such as:
-- The user is able to add open spots, this needs an IA implementation for analyse user inputs such as images and text.
+- Publish an APK from EAS (expo application services), I have trouble for setup the environment variables related to Firebase.
+- The user is able to add open spots, this needs an IA implementation to analyse user inputs such as images and text.
 - Give suggestions about the best open spot to work out, taking into account climate and distance.
 
 ### Install steps
