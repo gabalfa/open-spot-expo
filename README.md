@@ -8,7 +8,10 @@ Throughout this development I've learned about, graphic design, user experience,
 
 ## Features
 - It shows Open Spots (places to train and work out) by a selected region. 
-- It brings to you, information about climate and forecast, in your current location or about a selected spot.
+- It brings you, information on the current climate and forecast, in your current location or a selected spot.
+- It's bilingual, allowing change between Spanish and English language.
+- It's implemented Maps API to allow navigating between Open Spots.
+- It shows information about distance and a suggested path to arrive at the spot.
 
 ## What is cooking?
 Currently, I'm working around new features, such as:
