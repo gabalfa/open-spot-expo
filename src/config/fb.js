@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, initializeFirestore } from "firebase/firestore"
+
 import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '@env'
 
 const firebaseConfig = {
@@ -11,5 +12,11 @@ const firebaseConfig = {
   appId: APP_ID
 }
 
-initializeApp(firebaseConfig)
-export const database = getFirestore()
+const app = initializeApp(firebaseConfig)
+
+export const database = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
+
+// const app = initializeApp(firebaseConfig)
+// export const database = getFirestore(app)

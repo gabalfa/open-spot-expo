@@ -14,7 +14,16 @@ export default {
           "isIosBackgroundLocationEnabled": true,
           "isAndroidBackgroundLocationEnabled": true
         }
-      ]
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "flipper": true
+          }
+        }
+      ],
+      ["expo-community-flipper"],
     ],
     "name": "open-spot-expo",
     "slug": "open-spot-expo",
@@ -31,7 +40,8 @@ export default {
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "open-spot-expo"
     },
     "android": {
       "config": {
