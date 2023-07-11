@@ -9,15 +9,6 @@ import { Spots } from "./src/components/Spots"
 
 import { BACKGROUND_COLORS } from "./src/constants/colors"
 
-// import { connectToDevTools } from "react-devtools-core"
-
-// if (__DEV__) {
-//   connectToDevTools({
-//     host: "localhost",
-//     port: 8097,
-//   });
-// }
-
 export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>

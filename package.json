@@ -32,10 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "expo-community-flipper": "^48.0.1",
-    "react-devtools-core": "^4.27.8",
-    "react-native-flipper": "^0.203.0",
-    "react-native-flipper-performance-plugin": "^0.4.0"
+    "react-devtools-core": "^4.27.8"
   },
   "private": true
 }

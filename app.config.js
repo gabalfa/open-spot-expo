@@ -1,7 +1,5 @@
 import 'dotenv/config'
 
-// console.log('process.env::', process.env)
-
 export default {
   "expo": {
     "plugins": [
@@ -14,16 +12,7 @@ export default {
           "isIosBackgroundLocationEnabled": true,
           "isAndroidBackgroundLocationEnabled": true
         }
-      ],
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "flipper": true
-          }
-        }
-      ],
-      ["expo-community-flipper"],
+      ]
     ],
     "name": "open-spot-expo",
     "slug": "open-spot-expo",
@@ -46,8 +35,7 @@ export default {
     "android": {
       "config": {
         "googleMaps": {
-          //"apiKey": process.env.MAPS_API_KEY,
-          "apiKey": "AIzaSyByTcAtF6vQA95A7ojFpu7_u1qn0iNOhRY"
+          "apiKey": process.env.MAPS_API_KEY,
         }
       },
       "googleServicesFile": process.env.GOOGLE_SERVICES_JSON,
