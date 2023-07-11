@@ -18,6 +18,7 @@ Throughout this development I've learned about, graphic design, user experience,
 ## What is cooking?
 I'm working on new features, such as:
 - Show a summary of open spots grouped by sports.
+- Measures and metrics with Flipper implementation 
 - Pass all tests :)
 - Publish an APK from EAS (expo application services), I have trouble for setup the environment variables related to Firebase.
 - The user is able to add open spots, this needs an IA implementation to analyse user inputs such as images and text.
