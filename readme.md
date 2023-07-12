@@ -26,9 +26,7 @@ module.exports = {
   ]
 }
 ```
-
-
-### Stack
-This app is developed with Javascript, React-Native, Expo, Google Maps and Firebase.
+### Sources
 [Expo testing](https://docs.expo.dev/develop/unit-testing/)
+
 [Example with Testing library](https://www.notjust.dev/blog/2023-01-16-react-native-testing)
