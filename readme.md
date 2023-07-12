@@ -14,7 +14,7 @@ This branch has the implementation of Jest without ending.
   "test": "jest"
 },
 ```
-2. Create jest.config.js file:
+6. Create jest.config.js file:
 ```
 module.exports = {
   preset: "@testing-library/react-native",
@@ -26,6 +26,22 @@ module.exports = {
   ]
 }
 ```
+7. Code some test:
+```
+import { render, screen, fireEvent } from "@testing-library/react-native"
+import { Header } from "../components/Header"
+
+test("should render the label of the header", () => {
+  const { getByText } = render(
+    <Header />
+  );
+
+  const label = getByText("Ready to ride an Open Spot?")
+  expect(label).toBeTruthy();
+});
+```
+8. npm run test
+   
 ### Sources
 [Expo testing](https://docs.expo.dev/develop/unit-testing/)
 
