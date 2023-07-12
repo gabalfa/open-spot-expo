@@ -61,5 +61,5 @@ This app is developed with Javascript, React-Native, Expo, Google Maps and Fireb
 
 ![Preview 1](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-1.png)
 ![Preview 2](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-2.png)
-![Preview 3](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-3.png)
-![Preview 4](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-4.png)
+![Preview 3](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-4.png)
+![Preview 4](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-5.png)
