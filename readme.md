@@ -31,7 +31,6 @@ This branch has the implementation of Jest without ending.
 9. after npx expo start --dev-client
 
 ### Sources
+[Expo flipper](https://docs.expo.dev/guides/using-flipper/)
 
 ![Open spot view](https://github.com/gabalfa/open-spot-expo/blob/feature/flipperImplementation/previews/IMG-FLIPPER.png?raw=true)
-
-[Expo flipper](https://docs.expo.dev/guides/using-flipper/)
