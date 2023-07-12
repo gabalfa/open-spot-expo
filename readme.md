@@ -33,7 +33,11 @@ This branch has the implementation of Jest without ending.
 
 9. Run in terminal ```npx expo start --dev-client```
 
+### Currently 
+I'm working to solve some issues related to the plugin RN Perf monitor
+![Open spot view](https://github.com/gabalfa/open-spot-expo/blob/feature/flipperImplementation/previews/IMG-OPEN-SPOT-7.png)
+
 ### Sources
 [Expo flipper](https://docs.expo.dev/guides/using-flipper/)
 
-![Open spot view](https://github.com/gabalfa/open-spot-expo/blob/feature/flipperImplementation/previews/IMG-FLIPPER.png?raw=true)
+![Open spot view](https://github.com/gabalfa/open-spot-expo/blob/feature/flipperImplementation/previews/IMG-FLIPPER.png)
