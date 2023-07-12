@@ -59,8 +59,7 @@ This app is developed with Javascript, React-Native, Expo, Google Maps and Fireb
 ![firestore](https://img.icons8.com/color/48/firebase.png)
 ![maps](https://img.icons8.com/color/48/google-maps-new.png)
 
-# open-spot-expo
-
-OpenSpot is a mobile application that allows athletes and sports enthusiasts to discover and locate ideal training spots for their favourite sports. This GitHub repository contains the source code and related documentation for the SportsSpotter app, allowing developers to contribute, collaborate, and enhance the app's functionality.
-
-![Open spot view](https://github.com/gabalfa/open-spot-expo/blob/feature/flipperImplementation/previews/IMG-FLIPPER.png?raw=true)
+![Preview 1](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-1.png)
+![Preview 2](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-2.png)
+![Preview 3](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-3.png)
+![Preview 4](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-4.png)
