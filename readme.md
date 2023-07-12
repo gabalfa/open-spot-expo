@@ -26,7 +26,7 @@ module.exports = {
   ]
 }
 ```
-7. Code some test:
+7. Create a file, for example ".../__test__/components/Header.test.js":
 ```
 import { render, screen, fireEvent } from "@testing-library/react-native"
 import { Header } from "../components/Header"
