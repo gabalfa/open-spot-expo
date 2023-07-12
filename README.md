@@ -46,3 +46,5 @@ This app is developed with Javascript, React-Native, Expo, Google Maps and Fireb
 ![firestore](https://img.icons8.com/color/48/firebase.png)
 ![maps](https://img.icons8.com/color/48/google-maps-new.png)
 
+![Open spot view](https://imgbox.com/NO7O0jj49)
+
