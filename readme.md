@@ -32,4 +32,6 @@ This branch has the implementation of Jest without ending.
 
 ### Sources
 
+![Open spot view](https://imgbox.com/NO7O0jj49)
+
 [Expo flipper](https://docs.expo.dev/guides/using-flipper/)
