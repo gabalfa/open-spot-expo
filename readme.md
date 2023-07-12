@@ -27,8 +27,10 @@ This branch has the implementation of Jest without ending.
 ```
 
 7. Flipper requires creating a development build of your project
-8. ```eas build --profile development -p android``` / ```eas build --profile development -p ios```
-9. Then ```npx expo start --dev-client```
+8.
+```eas build --profile development -p android```
+```eas build --profile development -p ios```
+10. Then ```npx expo start --dev-client```
 
 ### Sources
 [Expo flipper](https://docs.expo.dev/guides/using-flipper/)
