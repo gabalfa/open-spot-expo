@@ -30,6 +30,7 @@ This branch has the implementation of Jest without ending.
 8.
 ```eas build --profile development -p android```
 ```eas build --profile development -p ios```
+
 10. Then ```npx expo start --dev-client```
 
 ### Sources
