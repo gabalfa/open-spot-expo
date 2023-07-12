@@ -3,10 +3,10 @@ This branch has the implementation of Jest without ending.
 
 ### Install steps
 
-1. npx expo install jest-expo jest
-2. npm install --save-dev react-test-renderer@same-version-react
-3. npm install --save-dev @testing-library/react-native
-4. npm install --save-dev @testing-library/jest-native
+1. Run ```npx expo install jest-expo jest```
+2. ```npm install --save-dev react-test-renderer@same-version-react```
+3. ```npm install --save-dev @testing-library/react-native```
+4. ```npm install --save-dev @testing-library/jest-native```
 5. Update package.json with:
 ```
 "scripts": {
@@ -40,7 +40,7 @@ test("should render the label of the header", () => {
   expect(label).toBeTruthy();
 });
 ```
-8. npm run test
+8. ```npm run test```
    
 ### Sources
 [Expo testing](https://docs.expo.dev/develop/unit-testing/)
