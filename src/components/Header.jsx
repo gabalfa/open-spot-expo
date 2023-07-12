@@ -37,7 +37,7 @@ export const Header = () => {
 
         <View style={styles.switchContainer}>
           
-          <Text style={styles.switchText}>{`EN`}</Text>
+          <Text style={styles.switchText}>{`En`}</Text>
 
           <Switch
             trackColor={{false: TEXT_COLORS.BLUE_SWITCH, true: TEXT_COLORS.YELLOW_SWITCH}}
@@ -50,7 +50,7 @@ export const Header = () => {
             value={isEnabled}
           />
 
-          <Text style={styles.switchText}>{`ES`}</Text>
+          <Text style={styles.switchText}>{`Es`}</Text>
 
         </View>
 
