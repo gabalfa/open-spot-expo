@@ -7,7 +7,7 @@ This branch has the implementation of Jest without ending.
 1. Install Flipper desktop app
 2. EAS CLI installed and logged in to your Expo account
 3. From Flipper run Setup Doctor
-4. npx expo install expo-dev-client
+4. ```npx expo install expo-dev-client```
 5. npx expo install expo-build-properties
 6. Update app.json or app.config.js:
 
