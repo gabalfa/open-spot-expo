@@ -78,10 +78,6 @@ export const ModalFilters = () => {
             }
           </ScrollView>
 
-          <View style={styles.spotsLength}>
-            <Text style={styles.textRegion}>{(spots.length) ? (`Great! there are ${spots.length} Spots in this region`) : ('')}</Text>
-          </View>
-
         </View>
 
         <View style={styles.footer}>

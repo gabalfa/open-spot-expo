@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React, { lazy, Suspense } from 'react'
 
+import { useSpots } from "../hooks/useSpots"
 import { useLocation } from "../hooks/useLocation"
 import { useFilters } from "../hooks/useFilters"
 import { useWeather } from "../hooks/useWeather"
@@ -14,6 +15,7 @@ import { TEXT_COLORS } from "../constants/colors"
 
 export default DetailSpot = () => {
 
+  const { spots } = useSpots()
   const { loadingWeather, weatherLocal, forecastWeatherLocal, weatherSpot, forecastWeatherSpot } = useWeather()
   const { currentLocation, distance, loadingLocation } = useLocation()
   const { selectedRegion, showWeather } = useFilters()
@@ -40,8 +42,11 @@ export default DetailSpot = () => {
                 )
               }
             </>
-          : <Text>{'Stadistics'}</Text>
-        }
+          : 
+            <View style={styles.spotsLength}>
+              <Text style={styles.textRegion}>{(spots.length) ? (`Great! there are ${spots.length} Spots in this region`) : ('')}</Text>
+            </View>
+          }
       </Suspense>
     </View>
   )
@@ -58,5 +63,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 5,
     backgroundColor: TEXT_COLORS.TERTIARY,
+  },
+  spotsLength: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  textRegion: {
+    color: TEXT_COLORS.INVERTED,
+    fontSize: 12,
   },
 })
