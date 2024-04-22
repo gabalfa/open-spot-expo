@@ -47,7 +47,7 @@
 ![javascript](https://img.icons8.com/color/100/javascript--v1.png)
 ![NextJs](https://img.icons8.com/color/100/nextjs.png)
 ![ReactJs](https://img.icons8.com/officel/100/react.png)
-
+![ReactJs](https://img.icons8.com/color/100/tailwind_css.png)
 --- 
 
 Este README refleja mi proceso de trabajo y los pasos seguidos para completar la prueba técnica.
