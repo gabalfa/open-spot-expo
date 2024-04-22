@@ -1,53 +1,65 @@
-# Prueba técnica Dapr, Dotnet, Front-End con ReactJS y NextJS
+# Open Spot
 
-## Pasos
+This repository contains the source code and related documentation for the Open Spot app.
+Open Spot is a mobile application that allows athletes and sports enthusiasts to discover and locate ideal training spots for their favourite sports.
 
-1. **Leer y entender la documentación de la prueba técnica.**
-   - Tomé el tiempo necesario para comprender claramente los requisitos y expectativas de la prueba técnica.
+## Motivations
 
-2. **Priorizar tareas.**
-   - Entendí la importancia de familiarizarme con tecnologías como ACA y Dapr.
-   - Decidí dejar para más tarde el trabajo en CI/CD y Testing, dándoles una prioridad más baja.
+### Have a personal software development project
 
-3. **Leer la documentación del workshop y entender claramente.**
-   - Configuré mi entorno de desarrollo según las indicaciones.
-   - Aunque encontré un ejemplo para desplegar en ACA, no pude seguir todos los pasos debido a la necesidad de una licencia de Azure.
+I began this project as a way to show proficiency in technical skills, so, I included technical topics such as state management, and hooks implementation, to solve requirements such as multilanguage, forecast climate, and a flow user experience.
 
-4. **Hacer pruebas de concepto con Dapr.**
-   - Opté por ejecutar el entorno de manera local para realizar pruebas de concepto.
+### Learning and training
 
-5. **Seguir los pasos del workshop.**
-   - Seguí la guía, adaptando los pasos que aplicaban al entorno local.
+Throughout this development I've learned about, graphic design, user experience, mobile software development, frontend architecture patterns, Javascript, Maps API, and Firebase, in addition, to solving many technical troubles related to development and deployment.
 
-6. **Resolver inconvenientes técnicos.**
-   - Abordé y solucioné los problemas técnicos que surgieron durante el desarrollo.
+## Features
 
-7. **Desarrollar el Front-End.**
-   - Elegí Next.js debido a su integración con ReactJS y las útiles APIs que aceleraron mi desarrollo.
+- It shows Open Spots (places to train and work out) by a selected region.
+- It brings you, information on the current climate and forecast, in your current location or a selected spot.
+- It's bilingual, allowing change between Spanish and English language.
+- It's implemented Maps API to allow navigating between Open Spots.
+- It shows information about distance and a suggested path to arrive at the spot.
 
-8. **Correr todos los pasos de la solución y verificar el funcionamiento.**
-   - Después de tener la solución en el repositorio de GitHub, verifiqué que todos los pasos funcionaran correctamente.
+## What is cooking?
 
-9. **Escribir la documentación.**
-   - Utilicé mi experiencia para redactar una documentación clara y detallada, facilitando así la comprensión y el uso futuro del proyecto.
+I'm working on new features, such as:
 
-10. **CI/CD.**
-    - Implementé CI/CD para automatizar el proceso de integración y despliegue, mejorando así la eficiencia del desarrollo.
+- Show a summary of open spots grouped by sports.
+- Measures and metrics with Flipper implementation
+- Pass all tests :)
+- Publish an APK from EAS (expo application services), I have trouble for setup the environment variables related to Firebase.
+- The user is able to add open spots, this needs an IA implementation to analyse user inputs such as images and text.
+- Give suggestions about the best open spot to work out, taking into account climate and distance.
 
-11. **Testing.**
-    - Desarrollé y ejecuté pruebas exhaustivas para garantizar la calidad y fiabilidad del código.
+### Install steps
 
-## Stack Tecnológico Utilizado
+To run this code you need:
 
+1. Install [Node.js](https://nodejs.org/en)
+2. To run a virtual device follow this guide [Expo Go](https://docs.expo.dev/get-started/expo-go/)
+3. Run the following commands in the terminal:
 
-![Dapr](https://dapr.io/images/dapr.svg)
-![DotNet](https://img.icons8.com/color/100/net-framework.png)
-![C#](https://img.icons8.com/ios-filled/100/c-sharp-logo.png)
+```
+git clone HTTP://github/gabalfa/open-spot-expo
+cd open-spot-expo
+npm install
+npx expo start
+```
 
-![javascript](https://img.icons8.com/color/100/javascript--v1.png)
-![NextJs](https://img.icons8.com/color/100/nextjs.png)
-![ReactJs](https://img.icons8.com/officel/100/react.png)
-![ReactJs](https://img.icons8.com/color/100/tailwind_css.png)
---- 
+4. Provide the secrets for each API key, as you can see in the file .dev.example
+5. Have a Firebase backend with correct data
 
-Este README refleja mi proceso de trabajo y los pasos seguidos para completar la prueba técnica.
+### Stack
+
+This app is developed with Javascript, React-Native, Expo, Google Maps and Firebase.
+
+![javascript](https://img.icons8.com/color/48/javascript--v1.png)
+![react native](https://img.icons8.com/nolan/64/react-native.png)
+![firestore](https://img.icons8.com/color/48/firebase.png)
+![maps](https://img.icons8.com/color/48/google-maps-new.png)
+
+![Preview 1](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-1.png)
+![Preview 2](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-2.png)
+![Preview 3](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-4.png)
+![Preview 4](https://github.com/gabalfa/open-spot-expo/blob/main/previews/IMG-OPEN-SPOT-5.png)
